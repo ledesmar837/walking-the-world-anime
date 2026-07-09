@@ -9,10 +9,6 @@ export const MAIN_NAV: NavItem[] = [
   { label: 'Estrenos', href: '/estrenos' },
   { label: 'Rankings', href: '/rankings' },
   { label: 'Curiosidades', href: '/curiosidades' },
-  { label: 'Guías', href: '/guias' },
-  { label: 'Reseñas', href: '/resenas' },
-  { label: 'Personajes', href: '/personajes' },
-  { label: 'Wallpapers', href: '/wallpapers' },
 ];
 
 export const SECONDARY_NAV: NavItem[] = [
@@ -26,12 +22,8 @@ export const FOOTER_NAV = {
     { label: 'Estrenos', href: '/estrenos' },
     { label: 'Rankings', href: '/rankings' },
     { label: 'Curiosidades', href: '/curiosidades' },
-    { label: 'Guías', href: '/guias' },
-    { label: 'Reseñas', href: '/resenas' },
   ],
   multimedia: [
-    { label: 'Wallpapers', href: '/wallpapers' },
-    { label: 'Personajes', href: '/personajes' },
     { label: 'Ofertas Anime', href: '/ofertas' },
   ],
   sitio: [

@@ -126,11 +126,12 @@ export default async function HomePage() {
                 ))}
               </div>
 
-              {/* More articles from different categories */}
+              {/* Curiosidades */}
               <SectionHeading
-                title="Descubre Más"
-                subtitle="Contenido variado del mundo anime"
-                icon="🌟"
+                title="Curiosidades"
+                subtitle="Descubre el lado oculto del anime"
+                icon="💡"
+                href="/curiosidades"
               />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {latestArticles.slice(6, 9).map((article) => (

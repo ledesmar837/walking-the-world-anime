@@ -35,37 +35,40 @@ export const CATEGORIES: Record<CategorySlug, Category> = {
   guias: {
     slug: 'guias',
     name: 'Guías',
-    description: 'Guías completas para disfrutar al máximo',
+    description: 'Guías completas',
     color: 'bg-green-600',
     icon: '📚',
   },
   resenas: {
     slug: 'resenas',
     name: 'Reseñas',
-    description: 'Análisis y críticas de tus animes favoritos',
+    description: 'Análisis y críticas',
     color: 'bg-orange-600',
     icon: '⭐',
   },
   personajes: {
     slug: 'personajes',
     name: 'Personajes',
-    description: 'Conoce a fondo los personajes más icónicos',
+    description: 'Personajes icónicos',
     color: 'bg-pink-600',
     icon: '🎭',
   },
   wallpapers: {
     slug: 'wallpapers',
     name: 'Wallpapers',
-    description: 'Los mejores fondos de pantalla de anime',
+    description: 'Fondos de pantalla',
     color: 'bg-indigo-600',
     icon: '🖼️',
   },
 };
+
+// Active categories shown in navigation/sidebar
+const ACTIVE_SLUGS: CategorySlug[] = ['noticias', 'estrenos', 'rankings', 'curiosidades'];
 
 export function getCategory(slug: CategorySlug): Category {
   return CATEGORIES[slug];
 }
 
 export function getAllCategories(): Category[] {
-  return Object.values(CATEGORIES);
+  return ACTIVE_SLUGS.map((slug) => CATEGORIES[slug]);
 }
