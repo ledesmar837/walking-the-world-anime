@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       'application/rss+xml': `${SITE_CONFIG.url}/rss.xml`,
     },
   },
+  verification: {
+    google: 'iCMwVbrcJHfQ3dHXabGZBTi9jWt7LJHHsGjeO8YRpzg',
+  },
 };
 
 export default function RootLayout({
