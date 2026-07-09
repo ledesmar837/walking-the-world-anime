@@ -63,24 +63,22 @@ export default async function HomePage() {
               />
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-12">
                 {[
-                  { title: 'Jujutsu Kaisen S3', studio: 'MAPPA', genre: 'Acción' },
-                  { title: 'Oshi no Ko S3', studio: 'Doga Kobo', genre: 'Drama' },
-                  { title: 'Spy x Family S3', studio: 'WIT/CloverWorks', genre: 'Comedia' },
-                  { title: 'My Hero Academia S8', studio: 'Bones', genre: 'Acción' },
+                  { title: 'Jujutsu Kaisen S3', studio: 'MAPPA', img: 'https://cdn.myanimelist.net/images/anime/1792/138022l.jpg' },
+                  { title: 'Oshi no Ko S3', studio: 'Doga Kobo', img: 'https://cdn.myanimelist.net/images/anime/1812/134736l.jpg' },
+                  { title: 'Spy x Family S3', studio: 'WIT/CloverWorks', img: 'https://cdn.myanimelist.net/images/anime/1441/122795l.jpg' },
+                  { title: 'Mushoku Tensei S3', studio: 'Studio Bind', img: 'https://cdn.myanimelist.net/images/anime/1530/117776l.jpg' },
                 ].map((anime) => (
                   <div
                     key={anime.title}
-                    className="p-4 rounded-xl bg-[var(--color-surface-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 transition-all text-center"
+                    className="rounded-xl bg-[var(--color-surface-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 transition-all overflow-hidden group"
                   >
-                    <div className="w-full aspect-[3/4] rounded-lg bg-[var(--color-surface)] mb-3 flex items-center justify-center text-4xl">
-                      🎬
+                    <div className="aspect-[16/9] overflow-hidden">
+                      <img src={anime.img} alt={anime.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                     </div>
-                    <h4 className="font-display font-semibold text-sm text-[var(--color-text-primary)] mb-1">
-                      {anime.title}
-                    </h4>
-                    <p className="text-xs text-[var(--color-text-tertiary)]">
-                      {anime.studio}
-                    </p>
+                    <div className="p-3">
+                      <h4 className="font-display font-semibold text-sm text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-primary-light)] transition-colors">{anime.title}</h4>
+                      <p className="text-xs text-[var(--color-text-tertiary)]">{anime.studio}</p>
+                    </div>
                   </div>
                 ))}
               </div>
