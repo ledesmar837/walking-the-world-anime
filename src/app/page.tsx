@@ -63,23 +63,26 @@ export default async function HomePage() {
               />
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-12">
                 {[
-                  { title: 'Jujutsu Kaisen S3', studio: 'MAPPA', img: 'https://cdn.myanimelist.net/images/anime/1792/138022l.jpg' },
-                  { title: 'Oshi no Ko S3', studio: 'Doga Kobo', img: 'https://cdn.myanimelist.net/images/anime/1812/134736l.jpg' },
-                  { title: 'Spy x Family S3', studio: 'WIT/CloverWorks', img: 'https://cdn.myanimelist.net/images/anime/1441/122795l.jpg' },
-                  { title: 'Mushoku Tensei S3', studio: 'Studio Bind', img: 'https://cdn.myanimelist.net/images/anime/1530/117776l.jpg' },
+                  { title: 'Jujutsu Kaisen S2', date: 'Jul 2023', img: 'https://cdn.myanimelist.net/images/anime/1792/138022l.jpg', url: 'https://myanimelist.net/anime/51009' },
+                  { title: 'Oshi no Ko', date: 'Abr 2023', img: 'https://cdn.myanimelist.net/images/anime/1812/134736l.jpg', url: 'https://myanimelist.net/anime/52034' },
+                  { title: 'Spy x Family', date: 'Abr 2022', img: 'https://cdn.myanimelist.net/images/anime/1441/122795l.jpg', url: 'https://myanimelist.net/anime/50265' },
+                  { title: 'Mushoku Tensei', date: 'Ene 2021', img: 'https://cdn.myanimelist.net/images/anime/1530/117776l.jpg', url: 'https://myanimelist.net/anime/39535' },
                 ].map((anime) => (
-                  <div
+                  <a
                     key={anime.title}
-                    className="rounded-xl bg-[var(--color-surface-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 transition-all overflow-hidden group"
+                    href={anime.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl bg-[var(--color-surface-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 transition-all overflow-hidden group block"
                   >
                     <div className="aspect-[16/9] overflow-hidden">
                       <img src={anime.img} alt={anime.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                     </div>
                     <div className="p-3">
                       <h4 className="font-display font-semibold text-sm text-[var(--color-text-primary)] mb-1 group-hover:text-[var(--color-primary-light)] transition-colors">{anime.title}</h4>
-                      <p className="text-xs text-[var(--color-text-tertiary)]">{anime.studio}</p>
+                      <p className="text-xs text-[var(--color-text-tertiary)]">📅 {anime.date}</p>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
 
