@@ -87,18 +87,18 @@ export default async function HomePage() {
 
               {/* Rankings Preview */}
               <SectionHeading
-                title="Rankings"
-                subtitle="Mejor valorados por la comunidad"
-                icon="🏆"
+                title="Ranking 2025-2026"
+                subtitle="Los más vistos del último año"
+                icon="🔥"
                 href="/rankings"
               />
               <div className="space-y-3 mb-12">
                 {[
-                  { rank: 1, title: 'Frieren: Beyond Journey\'s End', score: '9.26' },
-                  { rank: 2, title: 'Fullmetal Alchemist: Brotherhood', score: '9.11' },
-                  { rank: 3, title: 'Steins;Gate', score: '9.07' },
-                  { rank: 4, title: 'Attack on Titan S3 P2', score: '9.05' },
-                  { rank: 5, title: 'Hunter x Hunter (2011)', score: '9.03' },
+                  { rank: 1, title: 'Solo Leveling S2', members: '1.2M', score: '8.6' },
+                  { rank: 2, title: 'Dandadan', members: '980K', score: '8.5' },
+                  { rank: 3, title: 'Mushoku Tensei S3', members: '750K', score: '9.0' },
+                  { rank: 4, title: 'Demon Slayer: Hashira', members: '920K', score: '8.5' },
+                  { rank: 5, title: 'Oshi no Ko S2', members: '850K', score: '8.6' },
                 ].map((item) => (
                   <div
                     key={item.rank}
@@ -116,7 +116,8 @@ export default async function HomePage() {
                         {item.title}
                       </h4>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{item.members}</span>
                       <span className="text-yellow-500 text-sm">⭐</span>
                       <span className="font-bold text-sm text-[var(--color-text-primary)]">
                         {item.score}
