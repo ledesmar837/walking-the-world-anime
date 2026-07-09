@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Walking The World Anime 🌍
 
-## Getting Started
+Portal premium de noticias, estrenos, rankings y curiosidades del anime en español.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Next.js 16** — App Router + ISR
+- **React 19** — Server & Client Components
+- **Tailwind CSS v4** — Utility-first CSS
+- **TypeScript** — Tipado estricto
+- **Framer Motion** — Animaciones
+- **MDX** — Contenido enriquecido
+
+## 📡 Fuentes de Noticias
+
+El sitio se nutre de fuentes verificadas de noticias anime:
+
+| Fuente | Idioma | Categoría |
+|--------|--------|-----------|
+| Anime News Network | 🇬🇧 EN | Noticias |
+| Crunchyroll News | 🇬🇧 EN | Noticias |
+| SomosKudasai | 🇪🇸 ES | Noticias |
+| Ramen Para Dos | 🇪🇸 ES | Noticias |
+| Anmo Sugoi | 🇪🇸 ES | Noticias |
+
+Las noticias se actualizan cada hora vía ISR (Incremental Static Regeneration).
+
+## 🛠️ Desarrollo Local
 
 ```bash
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build de producción
+npm run build
+
+# Iniciar servidor de producción
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📦 Estructura del Proyecto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── page.tsx            # Home (ISR 30min)
+│   ├── layout.tsx          # Root layout + SEO
+│   ├── noticias/           # Noticias (ISR 1h)
+│   ├── estrenos/           # Calendario de estrenos
+│   ├── rankings/           # Rankings
+│   ├── curiosidades/       # Curiosidades
+│   ├── guias/              # Guías
+│   ├── resenas/            # Reseñas
+│   ├── personajes/         # Personajes
+│   ├── wallpapers/         # Wallpapers
+│   ├── ofertas/            # Ofertas (afiliados)
+│   ├── buscar/             # Buscador
+│   ├── acerca-de/          # Acerca de
+│   └── api/revalidate/     # Endpoint de revalidación
+├── components/             # Componentes React
+│   ├── layout/             # Navbar, Footer, Sidebar
+│   ├── home/               # HeroCarousel
+│   ├── article/            # ArticleCards
+│   └── ui/                 # Button, Card, Badge...
+├── lib/                    # Lógica
+│   ├── rss.ts              # Parser RSS
+│   ├── news-sources.ts     # Fuentes configuradas
+│   ├── news-service.ts     # Servicio de noticias
+│   ├── articles.ts         # Contenido local
+│   └── types.ts            # Tipos TypeScript
+├── content/                # Datos
+│   ├── config/             # Configuración
+│   └── data/               # Datos estáticos
+└── styles/                 # CSS
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Deploy en Vercel
 
-## Learn More
+1. Sube este repo a GitHub
+2. Ve a [vercel.com/new](https://vercel.com/new)
+3. Importa el repositorio
+4. Vercel detecta Next.js automáticamente
+5. Agrega la variable de entorno `REVALIDATE_SECRET` (un string secreto)
+6. Haz clic en **Deploy**
 
-To learn more about Next.js, take a look at the following resources:
+### Variables de Entorno Requeridas en Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Descripción |
+|----------|-------------|
+| `REVALIDATE_SECRET` | Secreto para el endpoint de revalidación |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Cron Job en Vercel
 
-## Deploy on Vercel
+El `vercel.json` incluye un cron job que revalida las noticias cada hora:
+```
+0 * * * * → POST /api/revalidate
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 💰 Monetización
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Google AdSense**: Espacios reservados (banner, sidebar, in-content)
+- **Afiliados**: Secciones de productos en artículos y página /ofertas
+- **Shopify**: Preparado para integrar Storefront API
+
+Para activar AdSense, descomenta el script en `src/app/layout.tsx` y reemplaza el `publisherId`.
+
+## 📝 Licencia
+
+© 2026 Walking The World Anime. Todos los derechos reservados.
