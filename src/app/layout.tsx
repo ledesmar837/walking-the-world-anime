@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from '@/lib/theme';
 import { SITE_CONFIG } from '@/content/config/site';
+import { Analytics } from '@/components/analytics/Analytics';
+import { ConsentBanner } from '@/components/analytics/ConsentBanner';
 import '@/app/globals.css';
 
 export const metadata: Metadata = {
@@ -90,6 +92,8 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
+        <Analytics />
+        <ConsentBanner />
         <ThemeProvider>
           {children}
         </ThemeProvider>
