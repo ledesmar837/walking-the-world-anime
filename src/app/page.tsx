@@ -94,11 +94,11 @@ export default async function HomePage() {
               />
               <div className="space-y-3 mb-12">
                 {[
-                  { rank: 1, title: "Frieren: Beyond Journey's End", score: 9.38 },
-                  { rank: 2, title: 'Fullmetal Alchemist: Brotherhood', score: 9.09 },
-                  { rank: 3, title: 'Steins;Gate', score: 9.07 },
-                  { rank: 4, title: 'Attack on Titan S3 P2', score: 9.05 },
-                  { rank: 5, title: 'Jujutsu Kaisen S2', score: 8.91 },
+                  { rank: 1, title: 'Frieren: Beyond Journey\'s End', score: '9.26' },
+                  { rank: 2, title: 'Fullmetal Alchemist: Brotherhood', score: '9.11' },
+                  { rank: 3, title: 'Steins;Gate', score: '9.07' },
+                  { rank: 4, title: 'Attack on Titan S3 P2', score: '9.05' },
+                  { rank: 5, title: 'Hunter x Hunter (2011)', score: '9.03' },
                 ].map((item) => (
                   <div
                     key={item.rank}
