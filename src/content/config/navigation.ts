@@ -12,7 +12,7 @@ export const MAIN_NAV: NavItem[] = [
 ];
 
 export const SECONDARY_NAV: NavItem[] = [
-  { label: 'Ofertas Anime', href: '/ofertas' },
+  { label: 'Shop', href: '/shop' },
   { label: 'Acerca de', href: '/acerca-de' },
 ];
 
@@ -24,7 +24,7 @@ export const FOOTER_NAV = {
     { label: 'Curiosidades', href: '/curiosidades' },
   ],
   multimedia: [
-    { label: 'Ofertas Anime', href: '/ofertas' },
+    { label: 'Shop', href: '/shop' },
   ],
   sitio: [
     { label: 'Acerca de', href: '/acerca-de' },
