@@ -28,9 +28,7 @@ export default async function HomePage() {
           <HeroCarousel slides={FEATURED_ARTICLES} />
 
           {/* ===== AD BANNER (reserved) ===== */}
-          <div className="mb-12 h-24 flex items-center justify-center border-2 border-dashed border-[var(--color-border)] rounded-[var(--radius-lg)] text-sm text-[var(--color-text-tertiary)] bg-[var(--color-surface-card)]">
-            📢 Google AdSense — Banner 728×90 — Espacio Reservado
-          </div>
+          <div className="mb-12 h-24 border-2 border-dashed border-[var(--color-border)] rounded-[var(--radius-lg)] bg-[var(--color-surface-card)]"></div>
 
           {/* ===== CONTENT + SIDEBAR ===== */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10">

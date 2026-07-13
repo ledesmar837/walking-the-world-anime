@@ -62,11 +62,7 @@ export default function Sidebar({ popularArticles, tags }: SidebarProps) {
 
       {/* Ad Space (reserved) */}
       <div className="bg-[var(--color-surface-card)] border border-[var(--color-border)] rounded-[var(--radius-lg)] p-5">
-        <div className="h-64 flex items-center justify-center border-2 border-dashed border-[var(--color-border)] rounded-[var(--radius-md)] text-xs text-[var(--color-text-tertiary)]">
-          📢 Espacio Publicitario
-          <br />
-          Google AdSense — 300×250
-        </div>
+        <div className="h-64 border-2 border-dashed border-[var(--color-border)] rounded-[var(--radius-md)]"></div>
       </div>
 
       {/* Social / Community */}

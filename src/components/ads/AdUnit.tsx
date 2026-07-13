@@ -63,12 +63,8 @@ export function AdUnit({
   if (!ADSENSE_ENABLED) {
     return (
       <div
-        className={`${styleClasses[style]} ${className} border-2 border-dashed border-[var(--color-border)] rounded-[var(--radius-lg)] text-sm text-[var(--color-text-tertiary)] bg-[var(--color-surface-card)]`}
-      >
-        📢 Google AdSense — Espacio Reservado
-        <br />
-        <span className="text-[0.6rem]">Activar con NEXT_PUBLIC_ADSENSE_ENABLED=true</span>
-      </div>
+        className={`${styleClasses[style]} ${className} border-2 border-dashed border-[var(--color-border)] rounded-[var(--radius-lg)] bg-[var(--color-surface-card)]`}
+      ></div>
     );
   }
 

@@ -156,9 +156,7 @@ export default async function ArticlePage({
                 </p>
 
                 {/* Ad In-Content (reserved) */}
-                <div className="my-8 h-24 flex items-center justify-center border-2 border-dashed border-[var(--color-border)] rounded-[var(--radius-lg)] text-sm text-[var(--color-text-tertiary)] bg-[var(--color-surface-card)]">
-                  📢 Google AdSense — In-Content — Espacio Reservado
-                </div>
+                <div className="my-8 h-24 border-2 border-dashed border-[var(--color-border)] rounded-[var(--radius-lg)] bg-[var(--color-surface-card)]"></div>
 
                 <h2>Reacciones de la comunidad</h2>
                 <p>
