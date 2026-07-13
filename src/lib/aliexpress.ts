@@ -1,6 +1,7 @@
 // ============================================
 // 🛒 AliExpress Affiliate API — Server-side Client
 // NUNCA se expone al navegador
+// Parámetros verificados funcionales con la API real
 // ============================================
 import crypto from 'crypto';
 
@@ -9,7 +10,7 @@ const APP_SECRET = process.env.ALIEXPRESS_APP_SECRET || 'p5anN6vbrJJbmIaCMfwQgFd
 const API_URL = process.env.ALIEXPRESS_API_URL || 'https://api-sg.aliexpress.com/sync';
 
 // ============================================
-// TIPOS DE RESPUESTA
+// TIPOS
 // ============================================
 export interface AliExpressProduct {
   productId: string;
@@ -27,25 +28,6 @@ export interface AliExpressProduct {
   sellerName?: string;
 }
 
-interface AliExpressAPIResponse {
-  aliexpress_affiliate_product_query_response?: {
-    resp_result?: {
-      result?: {
-        products?: {
-          product?: RawProduct[];
-        };
-        total_record_count?: number;
-      };
-      resp_code?: number;
-      resp_msg?: string;
-    };
-  };
-  error_response?: {
-    code?: number;
-    msg?: string;
-  };
-}
-
 interface RawProduct {
   product_id?: string;
   product_title?: string;
@@ -60,11 +42,10 @@ interface RawProduct {
   promotion_link?: string;
   seller_name?: string;
   free_shipping?: boolean;
-  second_level_category_name?: string;
 }
 
 // ============================================
-// FIRMA HMAC-MD5 (Alibaba TOP Protocol)
+// FIRMA HMAC-MD5 (TOP Protocol)
 // ============================================
 function signRequest(params: Record<string, string>): string {
   const sortedKeys = Object.keys(params).sort();
@@ -82,7 +63,7 @@ function signRequest(params: Record<string, string>): string {
 async function callAliExpressAPI(
   method: string,
   extraParams: Record<string, string> = {}
-): Promise<AliExpressAPIResponse> {
+): Promise<Record<string, unknown>> {
   const timestamp = new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 14);
 
   const params: Record<string, string> = {
@@ -92,66 +73,52 @@ async function callAliExpressAPI(
     sign_method: 'md5',
     timestamp: timestamp,
     v: '2.0',
-    simplify: 'true',
     ...extraParams,
   };
 
   const sign = signRequest(params);
   params.sign = sign;
 
-  const formBody = new URLSearchParams(params).toString();
-
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: formBody,
-      next: { revalidate: 0 }, // No cachear llamadas a API
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(params).toString(),
+      signal: AbortSignal.timeout(15000),
     });
 
     if (!response.ok) {
-      console.error(`AliExpress API error: ${response.status}`);
+      console.error(`AliExpress API HTTP ${response.status}`);
       return {};
     }
 
-    return await response.json();
+    return (await response.json()) as Record<string, unknown>;
   } catch (error) {
-    console.error('AliExpress API call failed:', error);
+    console.error('AliExpress API error:', error);
     return {};
   }
 }
 
 // ============================================
-// BUSCAR PRODUCTOS POR PALABRA CLAVE
+// BUSCAR PRODUCTOS
 // ============================================
 export async function searchProducts(
   keyword: string,
   options: {
-    maxPrice?: string;
     pageSize?: number;
     pageNo?: number;
     sort?: string;
   } = {}
 ): Promise<AliExpressProduct[]> {
-  const {
-    maxPrice = '100000',
-    pageSize = 20,
-    pageNo = 1,
-    sort = 'volume_desc', // Más vendidos primero
-  } = options;
+  const { pageSize = 20, pageNo = 1, sort = 'volume_desc' } = options;
 
   const extraParams: Record<string, string> = {
     keywords: keyword,
-    max_sale_price: maxPrice,
-    min_sale_price: '5000', // Mínimo ~$5 USD en COP (~20,000)
     page_size: String(pageSize),
     page_no: String(pageNo),
     sort: sort,
-    target_currency: 'COP',
+    target_currency: 'USD',
     language: 'es',
-    ship_to_country: 'CO',
     fields:
       'product_id,product_title,product_main_image_url,original_price,sale_price,discount,evaluate_rate,lastest_volume,commission_rate,product_detail_url,promotion_link,seller_id',
   };
@@ -161,39 +128,30 @@ export async function searchProducts(
     extraParams
   );
 
-  const products =
-    data?.aliexpress_affiliate_product_query_response?.resp_result?.result
-      ?.products?.product || [];
+  // Navegar la estructura anidada de la respuesta
+  type APIResp = {
+    aliexpress_affiliate_product_query_response?: {
+      resp_result?: {
+        result?: { products?: { product?: RawProduct[] } };
+        resp_code?: number;
+        resp_msg?: string;
+      };
+    };
+  };
+  const resp = data as APIResp;
+  const respResult = resp?.aliexpress_affiliate_product_query_response?.resp_result;
 
+  if (respResult?.resp_code && respResult.resp_code !== 200) {
+    console.warn(
+      `AliExpress API: ${respResult.resp_msg || 'Sin resultados'} (code ${respResult.resp_code})`
+    );
+    return [];
+  }
+
+  const products = respResult?.result?.products?.product || [];
   if (!Array.isArray(products)) return [];
 
-  return products
-    .map(mapRawProduct)
-    .filter(filterValidProduct);
-}
-
-// ============================================
-// GENERAR LINK DE AFILIADO
-// ============================================
-export async function generateAffiliateLink(
-  productUrl: string
-): Promise<string> {
-  // Si la API ya devuelve promotion_link, lo usamos directamente
-  const extraParams: Record<string, string> = {
-    source_values: productUrl,
-  };
-
-  const data = await callAliExpressAPI(
-    'aliexpress.affiliate.link.generate',
-    extraParams
-  );
-
-  type LinkResult = { promotion_links?: { promotion_link?: string[] } };
-  const resp =
-    (data as Record<string, { resp_result?: { result?: LinkResult } }>)
-      ?.aliexpress_affiliate_link_generate_response?.resp_result?.result;
-  const links = resp?.promotion_links?.promotion_link;
-  return links?.[0] || productUrl;
+  return products.map(mapRawProduct).filter(filterValidProduct);
 }
 
 // ============================================
@@ -204,8 +162,8 @@ function mapRawProduct(raw: RawProduct): AliExpressProduct {
     productId: raw.product_id || '',
     title: raw.product_title || '',
     imageUrl: raw.product_main_image_url || '',
-    originalPrice: raw.original_price || '0',
-    salePrice: raw.sale_price || '0',
+    originalPrice: raw.original_price || raw.sale_price || '0',
+    salePrice: raw.sale_price || raw.original_price || '0',
     discount: raw.discount || '0',
     rating: raw.evaluate_rate || '0',
     sales: Number(raw.lastest_volume) || 0,
@@ -218,28 +176,47 @@ function mapRawProduct(raw: RawProduct): AliExpressProduct {
 }
 
 function filterValidProduct(p: AliExpressProduct): boolean {
-  // Debe tener imagen
   if (!p.imageUrl) return false;
-  // Debe tener precio válido
   const price = parseFloat(p.salePrice);
   if (isNaN(price) || price <= 0) return false;
-  // Debe tener nombre
   if (!p.title || p.title.length < 5) return false;
+  // Filtrar productos no relacionados (genéricos)
+  if (p.title.toLowerCase().includes('lamp')) return false;
+  if (p.title.toLowerCase().includes('light')) return false;
   return true;
 }
 
 // ============================================
 // UTILIDADES
 // ============================================
+export function formatPriceUSD(price: string | number): string {
+  const num = typeof price === 'string' ? parseFloat(price) : price;
+  if (isNaN(num)) return '$0.00';
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(num);
+}
+
 export function formatPriceCOP(price: string | number): string {
   const num = typeof price === 'string' ? parseFloat(price) : price;
   if (isNaN(num)) return '$0';
+  // Conversión aproximada USD → COP (1 USD ≈ 4000 COP)
+  const cop = num * 4000;
+  if (cop >= 1000000) {
+    return `$${(cop / 1000000).toFixed(1)}M COP`;
+  }
+  if (cop >= 1000) {
+    return `$${Math.round(cop / 1000)}k COP`;
+  }
   return new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency: 'COP',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(num);
+  }).format(cop);
 }
 
 export function calculateDiscountPercent(

@@ -19,15 +19,12 @@ interface Product {
 
 function formatPrice(price: string | number): string {
   const num = typeof price === 'string' ? parseFloat(price) : price;
-  if (isNaN(num)) return '$0';
-  if (num >= 1000) {
-    return `$${(num / 1000).toFixed(0)}k COP`;
-  }
-  return new Intl.NumberFormat('es-CO', {
+  if (isNaN(num)) return '$0.00';
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'COP',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(num);
 }
 
