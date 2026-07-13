@@ -144,31 +144,33 @@ export default async function HomePage() {
                 ))}
               </div>
 
-              {/* Shop AliExpress */}
+              {/* Shop Anime — Top 5 Franquicias */}
               <div className="mt-10">
                 <SectionHeading
                   title="Shop de Anime"
-                  subtitle="Merchandising oficial con los mejores precios"
+                  subtitle="Figuras LED, GK, articuladas y coleccionables"
                   icon="🛒"
                   href="/shop"
                 />
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                   {[
-                    { icon: '🐉', name: 'Dragon Ball', slug: 'dragon-ball' },
-                    { icon: '🏴‍☠️', name: 'One Piece', slug: 'one-piece' },
-                    { icon: '🍥', name: 'Naruto', slug: 'naruto' },
-                    { icon: '🗡️', name: 'Solo Leveling', slug: 'solo-leveling' },
-                    { icon: '✨', name: 'Frieren', slug: 'frieren' },
-                    { icon: '⚔️', name: 'Demon Slayer', slug: 'demon-slayer' },
+                    { icon: '🐉', name: 'Dragon Ball', slug: 'dragon-ball', sub: 'Goku · Vegeta · Broly' },
+                    { icon: '🏴‍☠️', name: 'One Piece', slug: 'one-piece', sub: 'Luffy · Zoro · Shanks' },
+                    { icon: '🗡️', name: 'Solo Leveling', slug: 'solo-leveling', sub: 'Jinwoo · Beru · Igris' },
+                    { icon: '🍥', name: 'Naruto', slug: 'naruto', sub: 'Sabio · Itachi · Madara' },
+                    { icon: '⚔️', name: 'Demon Slayer', slug: 'demon-slayer', sub: 'Tanjiro · Rengoku · Nezuko' },
                   ].map((cat) => (
                     <Link
                       key={cat.slug}
                       href={`/shop/${cat.slug}`}
-                      className="p-3 rounded-xl bg-[var(--color-surface-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/30 hover:-translate-y-1 transition-all text-center group"
+                      className="p-4 rounded-xl bg-[var(--color-surface-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/40 hover:-translate-y-1 transition-all text-center group"
                     >
-                      <span className="text-2xl block mb-1">{cat.icon}</span>
-                      <span className="text-[0.65rem] font-semibold text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary)] transition-colors">
+                      <span className="text-3xl block mb-2">{cat.icon}</span>
+                      <span className="text-sm font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-primary)] transition-colors block">
                         {cat.name}
+                      </span>
+                      <span className="text-[0.55rem] text-[var(--color-text-tertiary)] mt-0.5 block">
+                        {cat.sub}
                       </span>
                     </Link>
                   ))}

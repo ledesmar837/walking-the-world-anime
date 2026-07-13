@@ -1,11 +1,11 @@
 // ============================================
-// 💾 Product Store — Cache JSON + Sync
+// 💾 Product Store — Búsquedas múltiples + Bloques temáticos
 // ============================================
 import fs from 'fs';
 import path from 'path';
 import type { AliExpressProduct } from '@/lib/aliexpress';
 import { searchProducts } from '@/lib/aliexpress';
-import { PRODUCT_CATEGORIES, PRODUCT_CONFIG } from '@/lib/product-categories';
+import { PRODUCT_CATEGORIES, SHOP_BLOCKS, TOP_FEATURED_SLUGS, PRODUCT_CONFIG } from '@/lib/product-categories';
 
 const DATA_DIR = path.join(process.cwd(), 'data', 'products');
 
@@ -43,14 +43,14 @@ function isCacheValid(slug: string): boolean {
   return Date.now() - new Date(cache.updatedAt).getTime() < PRODUCT_CONFIG.cacheTTL;
 }
 
-// Normalizar campos snake_case → camelCase al leer del cache
 function normalizeProduct(raw: Record<string, unknown>): AliExpressProduct {
+  const usdRate = 7.2;
   return {
     productId: String(raw.product_id || raw.productId || ''),
     title: String(raw.product_title || raw.title || ''),
     imageUrl: String(raw.product_main_image_url || raw.imageUrl || ''),
-    originalPrice: String(raw.original_price || raw.originalPrice || '0'),
-    salePrice: String(raw.sale_price || raw.salePrice || '0'),
+    originalPrice: (parseFloat(String(raw.original_price || raw.originalPrice || '0')) / usdRate).toFixed(2),
+    salePrice: (parseFloat(String(raw.sale_price || raw.salePrice || '0')) / usdRate).toFixed(2),
     discount: String(raw.discount || '0'),
     rating: String(raw.evaluate_rate || raw.rating || '0'),
     sales: Number(raw.lastest_volume || raw.sales) || 0,
@@ -61,6 +61,24 @@ function normalizeProduct(raw: Record<string, unknown>): AliExpressProduct {
   };
 }
 
+// Buscar con múltiples queries y combinar resultados
+async function searchMultiQueries(queries: string[]): Promise<AliExpressProduct[]> {
+  const all: AliExpressProduct[] = [];
+  const seen = new Set<string>();
+  for (const q of queries) {
+    try {
+      const products = await searchProducts(q, { pageSize: PRODUCT_CONFIG.apiPageSize, sort: 'volume_desc' });
+      for (const p of products) {
+        if (!seen.has(p.productId)) {
+          seen.add(p.productId);
+          all.push(p);
+        }
+      }
+    } catch { /* continuar */ }
+  }
+  return all.sort((a, b) => (b.sales || 0) - (a.sales || 0));
+}
+
 export async function getProductsByCategory(slug: string, forceRefresh = false): Promise<AliExpressProduct[]> {
   if (!forceRefresh && isCacheValid(slug)) {
     const cache = readCache(slug);
@@ -69,9 +87,8 @@ export async function getProductsByCategory(slug: string, forceRefresh = false):
   const category = PRODUCT_CATEGORIES.find((c) => c.slug === slug);
   if (!category) return [];
   try {
-    const products = await searchProducts(category.searchQuery, { pageSize: PRODUCT_CONFIG.apiPageSize, sort: 'volume_desc' });
+    const products = await searchMultiQueries(category.searchQueries);
     if (products.length > 0) writeCache(slug, products);
-    else { const old = readCache(slug); if (old) return old.products.map(normalizeProduct).slice(0, PRODUCT_CONFIG.productsPerCategory); }
     return products.slice(0, PRODUCT_CONFIG.productsPerCategory);
   } catch {
     const old = readCache(slug);
@@ -79,11 +96,23 @@ export async function getProductsByCategory(slug: string, forceRefresh = false):
   }
 }
 
+// Top 5 categorías para Home
+export async function getTopFeaturedProducts(): Promise<{ slug: string; name: string; icon: string; products: AliExpressProduct[] }[]> {
+  const result = [];
+  for (const slug of TOP_FEATURED_SLUGS) {
+    const cat = PRODUCT_CATEGORIES.find((c) => c.slug === slug);
+    const products = await getProductsByCategory(slug);
+    result.push({ slug, name: cat?.name || slug, icon: cat?.icon || '', products: products.slice(0, 6) });
+  }
+  return result;
+}
+
+// Más vendidos global
 export async function getTopSellingProducts(limit = 12): Promise<AliExpressProduct[]> {
   const all: AliExpressProduct[] = [];
   for (const cat of PRODUCT_CATEGORIES) {
-    const products = await getProductsByCategory(cat.slug);
-    all.push(...products);
+    const p = await getProductsByCategory(cat.slug);
+    all.push(...p);
   }
   return all.sort((a, b) => (b.sales || 0) - (a.sales || 0)).slice(0, limit);
 }
@@ -92,7 +121,7 @@ export async function syncAllCategories(): Promise<{ success: string[]; failed: 
   const result = { success: [] as string[], failed: [] as string[] };
   for (const cat of PRODUCT_CATEGORIES) {
     try {
-      const p = await searchProducts(cat.searchQuery, { pageSize: PRODUCT_CONFIG.apiPageSize, sort: 'volume_desc' });
+      const p = await searchMultiQueries(cat.searchQueries);
       if (p.length > 0) { writeCache(cat.slug, p); result.success.push(cat.slug); }
       else result.failed.push(cat.slug);
     } catch { result.failed.push(cat.slug); }
