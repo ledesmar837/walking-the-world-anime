@@ -44,13 +44,12 @@ function isCacheValid(slug: string): boolean {
 }
 
 function normalizeProduct(raw: Record<string, unknown>): AliExpressProduct {
-  const usdRate = 7.2;
   return {
     productId: String(raw.product_id || raw.productId || ''),
     title: String(raw.product_title || raw.title || ''),
     imageUrl: String(raw.product_main_image_url || raw.imageUrl || ''),
-    originalPrice: (parseFloat(String(raw.original_price || raw.originalPrice || '0')) / usdRate).toFixed(2),
-    salePrice: (parseFloat(String(raw.sale_price || raw.salePrice || '0')) / usdRate).toFixed(2),
+    originalPrice: String(raw.original_price || raw.originalPrice || '0'),
+    salePrice: String(raw.sale_price || raw.salePrice || '0'),
     discount: String(raw.discount || '0'),
     rating: String(raw.evaluate_rate || raw.rating || '0'),
     sales: Number(raw.lastest_volume || raw.sales) || 0,
