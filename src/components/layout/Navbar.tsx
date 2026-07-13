@@ -242,11 +242,11 @@ export default function Navbar() {
 
                 <div className="mt-8 pt-8 border-t border-[var(--color-border)]">
                   <Link
-                    href="/ofertas"
+                    href="/shop"
                     onClick={() => setIsMobileOpen(false)}
                     className="block px-4 py-3 rounded-xl text-sm font-semibold text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 transition-all mb-2"
                   >
-                    🛒 Ofertas Anime
+                    🛒 Shop de Anime
                   </Link>
                   <Link
                     href="/acerca-de"
