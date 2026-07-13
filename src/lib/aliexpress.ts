@@ -1,7 +1,6 @@
 // ============================================
-// 🛒 AliExpress Affiliate API — Server-side Client
-// NUNCA se expone al navegador
-// Parámetros verificados funcionales con la API real
+// 🛒 AliExpress Affiliate API — Server-side Client  
+// Precios extraídos desde pdp_npi en la URL (USD real)
 // ============================================
 import crypto from 'crypto';
 
@@ -9,15 +8,12 @@ const APP_KEY = process.env.ALIEXPRESS_APP_KEY || '539462';
 const APP_SECRET = process.env.ALIEXPRESS_APP_SECRET || 'p5anN6vbrJJbmIaCMfwQgFdDUnVtcgXd';
 const API_URL = process.env.ALIEXPRESS_API_URL || 'https://api-sg.aliexpress.com/sync';
 
-// ============================================
-// TIPOS
-// ============================================
 export interface AliExpressProduct {
   productId: string;
   title: string;
   imageUrl: string;
-  originalPrice: string;
-  salePrice: string;
+  originalPrice: string;    // USD
+  salePrice: string;        // USD
   discount: string;
   rating: string;
   sales: number;
@@ -25,7 +21,6 @@ export interface AliExpressProduct {
   commissionRate?: string;
   productUrl: string;
   promotionLink: string;
-  sellerName?: string;
 }
 
 interface RawProduct {
@@ -40,45 +35,49 @@ interface RawProduct {
   commission_rate?: string;
   product_detail_url?: string;
   promotion_link?: string;
-  seller_name?: string;
-  free_shipping?: boolean;
 }
 
 // ============================================
-// FIRMA HMAC-MD5 (TOP Protocol)
+// EXTRAER PRECIO REAL EN USD DESDE LA URL
+// La API devuelve precios en CNY; el precio USD
+// está en el parámetro pdp_npi de la URL
+// Formato: ...?pdp_npi=6@dis!USD!128.34!61.60!!!...
+//                                      ^orig  ^sale
+// ============================================
+function extractUSDPrices(url: string): { original: string; sale: string } | null {
+  try {
+    const match = url.match(/pdp_npi=[^&]*/);
+    if (!match) return null;
+    const decoded = decodeURIComponent(match[0]);
+    // Buscar patrón: !USD!{orig}!{sale}!
+    const usdMatch = decoded.match(/USD!(\d+\.?\d*)!(\d+\.?\d*)/);
+    if (usdMatch) {
+      return { original: usdMatch[1], sale: usdMatch[2] };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+// ============================================
+// FIRMA HMAC-MD5
 // ============================================
 function signRequest(params: Record<string, string>): string {
   const sortedKeys = Object.keys(params).sort();
   let signStr = APP_SECRET;
-  for (const key of sortedKeys) {
-    signStr += key + params[key];
-  }
+  for (const key of sortedKeys) signStr += key + params[key];
   signStr += APP_SECRET;
   return crypto.createHash('md5').update(signStr, 'utf8').digest('hex').toUpperCase();
 }
 
-// ============================================
-// LLAMADA A LA API
-// ============================================
-async function callAliExpressAPI(
-  method: string,
-  extraParams: Record<string, string> = {}
-): Promise<Record<string, unknown>> {
+async function callAliExpressAPI(method: string, extraParams: Record<string, string> = {}): Promise<Record<string, unknown>> {
   const timestamp = new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 14);
-
   const params: Record<string, string> = {
-    app_key: APP_KEY,
-    format: 'json',
-    method: method,
-    sign_method: 'md5',
-    timestamp: timestamp,
-    v: '2.0',
+    app_key: APP_KEY, format: 'json', method, sign_method: 'md5', timestamp, v: '2.0',
     ...extraParams,
   };
-
-  const sign = signRequest(params);
-  params.sign = sign;
-
+  params.sign = signRequest(params);
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -86,92 +85,50 @@ async function callAliExpressAPI(
       body: new URLSearchParams(params).toString(),
       signal: AbortSignal.timeout(15000),
     });
-
-    if (!response.ok) {
-      console.error(`AliExpress API HTTP ${response.status}`);
-      return {};
-    }
-
+    if (!response.ok) { console.error(`AliExpress HTTP ${response.status}`); return {}; }
     return (await response.json()) as Record<string, unknown>;
-  } catch (error) {
-    console.error('AliExpress API error:', error);
-    return {};
-  }
+  } catch (error) { console.error('AliExpress error:', error); return {}; }
 }
 
-// ============================================
-// BUSCAR PRODUCTOS
-// ============================================
 export async function searchProducts(
   keyword: string,
-  options: {
-    pageSize?: number;
-    pageNo?: number;
-    sort?: string;
-  } = {}
+  options: { pageSize?: number; pageNo?: number; sort?: string } = {}
 ): Promise<AliExpressProduct[]> {
   const { pageSize = 20, pageNo = 1, sort = 'volume_desc' } = options;
-
-  const extraParams: Record<string, string> = {
+  const data = await callAliExpressAPI('aliexpress.affiliate.product.query', {
     keywords: keyword,
-    page_size: String(pageSize),
-    page_no: String(pageNo),
-    sort: sort,
-    target_currency: 'USD',
-    language: 'es',
-    fields:
-      'product_id,product_title,product_main_image_url,original_price,sale_price,discount,evaluate_rate,lastest_volume,commission_rate,product_detail_url,promotion_link,seller_id',
-  };
+    page_size: String(pageSize), page_no: String(pageNo), sort,
+    target_currency: 'USD', language: 'en',
+    fields: 'product_id,product_title,product_main_image_url,original_price,sale_price,discount,evaluate_rate,lastest_volume,commission_rate,product_detail_url,promotion_link',
+  });
 
-  const data = await callAliExpressAPI(
-    'aliexpress.affiliate.product.query',
-    extraParams
-  );
-
-  // Navegar la estructura anidada de la respuesta
-  type APIResp = {
-    aliexpress_affiliate_product_query_response?: {
-      resp_result?: {
-        result?: { products?: { product?: RawProduct[] } };
-        resp_code?: number;
-        resp_msg?: string;
-      };
-    };
-  };
+  type APIResp = { aliexpress_affiliate_product_query_response?: { resp_result?: { result?: { products?: { product?: RawProduct[] } }; resp_code?: number; resp_msg?: string } } };
   const resp = data as APIResp;
-  const respResult = resp?.aliexpress_affiliate_product_query_response?.resp_result;
-
-  if (respResult?.resp_code && respResult.resp_code !== 200) {
-    console.warn(
-      `AliExpress API: ${respResult.resp_msg || 'Sin resultados'} (code ${respResult.resp_code})`
-    );
-    return [];
-  }
-
-  const products = respResult?.result?.products?.product || [];
+  const rr = resp?.aliexpress_affiliate_product_query_response?.resp_result;
+  if (rr?.resp_code && rr.resp_code !== 200) { console.warn(`AliExpress: ${rr.resp_msg} (${rr.resp_code})`); return []; }
+  const products = rr?.result?.products?.product || [];
   if (!Array.isArray(products)) return [];
-
   return products.map(mapRawProduct).filter(filterValidProduct);
 }
 
-// ============================================
-// MAPEO Y FILTROS
-// ============================================
 function mapRawProduct(raw: RawProduct): AliExpressProduct {
+  const url = raw.product_detail_url || '';
+  const usdPrices = extractUSDPrices(url);
+
   return {
     productId: raw.product_id || '',
     title: raw.product_title || '',
     imageUrl: raw.product_main_image_url || '',
-    originalPrice: raw.original_price || raw.sale_price || '0',
-    salePrice: raw.sale_price || raw.original_price || '0',
+    // Usar precios USD extraídos de la URL; fallback al campo original / 7 (CNY→USD aprox)
+    originalPrice: usdPrices?.original || (parseFloat(raw.original_price || '0') / 7).toFixed(2),
+    salePrice: usdPrices?.sale || (parseFloat(raw.sale_price || '0') / 7).toFixed(2),
     discount: raw.discount || '0',
     rating: raw.evaluate_rate || '0',
     sales: Number(raw.lastest_volume) || 0,
-    freeShipping: Boolean(raw.free_shipping),
+    freeShipping: false,
     commissionRate: raw.commission_rate || undefined,
-    productUrl: raw.product_detail_url || '',
-    promotionLink: raw.promotion_link || raw.product_detail_url || '',
-    sellerName: raw.seller_name,
+    productUrl: url,
+    promotionLink: raw.promotion_link || url,
   };
 }
 
@@ -180,51 +137,11 @@ function filterValidProduct(p: AliExpressProduct): boolean {
   const price = parseFloat(p.salePrice);
   if (isNaN(price) || price <= 0) return false;
   if (!p.title || p.title.length < 5) return false;
-  // Filtrar productos no relacionados (genéricos)
-  if (p.title.toLowerCase().includes('lamp')) return false;
-  if (p.title.toLowerCase().includes('light')) return false;
   return true;
 }
 
-// ============================================
-// UTILIDADES
-// ============================================
 export function formatPriceUSD(price: string | number): string {
   const num = typeof price === 'string' ? parseFloat(price) : price;
   if (isNaN(num)) return '$0.00';
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(num);
-}
-
-export function formatPriceCOP(price: string | number): string {
-  const num = typeof price === 'string' ? parseFloat(price) : price;
-  if (isNaN(num)) return '$0';
-  // Conversión aproximada USD → COP (1 USD ≈ 4000 COP)
-  const cop = num * 4000;
-  if (cop >= 1000000) {
-    return `$${(cop / 1000000).toFixed(1)}M COP`;
-  }
-  if (cop >= 1000) {
-    return `$${Math.round(cop / 1000)}k COP`;
-  }
-  return new Intl.NumberFormat('es-CO', {
-    style: 'currency',
-    currency: 'COP',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(cop);
-}
-
-export function calculateDiscountPercent(
-  original: string,
-  sale: string
-): number {
-  const orig = parseFloat(original);
-  const sl = parseFloat(sale);
-  if (!orig || !sl || orig <= sl) return 0;
-  return Math.round(((orig - sl) / orig) * 100);
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 }).format(num);
 }
