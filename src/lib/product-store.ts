@@ -58,7 +58,6 @@ function normalizeProduct(raw: Record<string, unknown>): AliExpressProduct {
     commissionRate: raw.commission_rate || raw.commissionRate ? String(raw.commission_rate || raw.commissionRate) : undefined,
     productUrl: String(raw.product_detail_url || raw.productUrl || ''),
     promotionLink: String(raw.promotion_link || raw.promotionLink || raw.product_detail_url || raw.productUrl || ''),
-    sellerName: raw.seller_name || raw.sellerName ? String(raw.seller_name || raw.sellerName) : undefined,
   };
 }
 
