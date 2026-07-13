@@ -112,23 +112,20 @@ export async function searchProducts(
 }
 
 function mapRawProduct(raw: RawProduct): AliExpressProduct {
-  const url = raw.product_detail_url || '';
-  const usdPrices = extractUSDPrices(url);
-
+  const usdRate = 7.2; // 1 USD ≈ 7.2 CNY
   return {
     productId: raw.product_id || '',
     title: raw.product_title || '',
     imageUrl: raw.product_main_image_url || '',
-    // Usar precios USD extraídos de la URL; fallback al campo original / 7 (CNY→USD aprox)
-    originalPrice: usdPrices?.original || (parseFloat(raw.original_price || '0') / 7).toFixed(2),
-    salePrice: usdPrices?.sale || (parseFloat(raw.sale_price || '0') / 7).toFixed(2),
+    originalPrice: (parseFloat(raw.original_price || '0') / usdRate).toFixed(2),
+    salePrice: (parseFloat(raw.sale_price || '0') / usdRate).toFixed(2),
     discount: raw.discount || '0',
     rating: raw.evaluate_rate || '0',
     sales: Number(raw.lastest_volume) || 0,
     freeShipping: false,
     commissionRate: raw.commission_rate || undefined,
-    productUrl: url,
-    promotionLink: raw.promotion_link || url,
+    productUrl: raw.product_detail_url || '',
+    promotionLink: raw.promotion_link || raw.product_detail_url || '',
   };
 }
 

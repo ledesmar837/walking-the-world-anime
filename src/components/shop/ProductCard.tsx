@@ -86,7 +86,7 @@ export function ProductCard({ product }: { product: Product }) {
         {/* Price */}
         <div className="flex items-baseline gap-2 mb-1">
           <span className="text-base font-extrabold text-[var(--color-text-primary)]">
-            {formatPrice(product.salePrice)}
+            ~{formatPrice(product.salePrice)}
           </span>
           {discountPct > 0 && (
             <span className="text-xs text-[var(--color-text-tertiary)] line-through">
@@ -94,6 +94,7 @@ export function ProductCard({ product }: { product: Product }) {
             </span>
           )}
         </div>
+        <p className="text-[0.55rem] text-[var(--color-text-tertiary)] mb-1">Precio aproximado</p>
 
         {/* Rating + Commission */}
         <div className="flex items-center gap-2 text-[0.6rem] text-[var(--color-text-tertiary)]">

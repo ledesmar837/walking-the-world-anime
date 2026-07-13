@@ -113,6 +113,14 @@ export default function Navbar() {
                   </Link>
                 );
               })}
+              <Link
+                href="/shop"
+                className={`relative px-3.5 py-2 text-sm font-bold rounded-lg transition-all duration-200 bg-[var(--color-accent)]/10 text-[var(--color-accent-light)] hover:bg-[var(--color-accent)]/20 ${
+                  pathname.startsWith('/shop') ? 'ring-2 ring-[var(--color-accent)]' : ''
+                }`}
+              >
+                🛒 Shop
+              </Link>
             </div>
 
             {/* Actions */}
