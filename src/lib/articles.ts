@@ -1,356 +1,288 @@
 // ============================================
-// 📰  Walking The World Anime — Contenido
-//     Imágenes reales via MyAnimeList CDN
+// 📰  Walking The World Anime — Noticias actualizadas
+//     Julio 2026 | Fuentes: ANN, RamenParaDos, AnmoSugoi, AnimeCorner
 // ============================================
 import type { Article } from '@/lib/types';
 
-// --- IMAGE CDN (MAL) ---
 const IMG = {
-  jujutsu: 'https://cdn.myanimelist.net/images/anime/1171/109222l.jpg',
-  jujutsuS2: 'https://cdn.myanimelist.net/images/anime/1792/138022l.jpg',
-  onePiece: 'https://cdn.myanimelist.net/images/anime/1244/138851l.jpg',
-  chainsawMan: 'https://cdn.myanimelist.net/images/anime/1806/126216l.jpg',
-  soloLeveling: 'https://cdn.myanimelist.net/images/anime/1801/142390l.jpg',
-  dandadan: 'https://cdn.myanimelist.net/images/anime/1584/143719l.jpg',
-  mieruko: 'https://cdn.myanimelist.net/images/anime/1277/117155l.jpg',
-  dragonBall: 'https://cdn.myanimelist.net/images/anime/7/74606l.jpg',
-  fate: 'https://cdn.myanimelist.net/images/anime/12/67333l.jpg',
-  frieren: 'https://cdn.myanimelist.net/images/anime/1015/138006l.jpg',
-  aot: 'https://cdn.myanimelist.net/images/anime/10/47347l.jpg',
-  cyberpunk: 'https://cdn.myanimelist.net/images/anime/1818/126435l.jpg',
-  demonSlayer: 'https://cdn.myanimelist.net/images/anime/1286/99889l.jpg',
-  hunterXHunter: 'https://cdn.myanimelist.net/images/anime/1337/99013l.jpg',
+  jjk: 'https://cdn.myanimelist.net/images/anime/1792/138022l.jpg',
   naruto: 'https://cdn.myanimelist.net/images/anime/13/17405l.jpg',
-  deathNote: 'https://cdn.myanimelist.net/images/anime/9/9453l.jpg',
-  evangelion: 'https://cdn.myanimelist.net/images/anime/1314/108941l.jpg',
-  spyFamily: 'https://cdn.myanimelist.net/images/anime/1441/122795l.jpg',
-  oshiNoKo: 'https://cdn.myanimelist.net/images/anime/1812/134736l.jpg',
+  angel: 'https://cdn.myanimelist.net/images/anime/1530/117776l.jpg',
+  villainess: 'https://cdn.myanimelist.net/images/anime/1015/138006l.jpg',
+  manga: 'https://cdn.myanimelist.net/images/anime/1286/99889l.jpg',
+  banana: 'https://cdn.myanimelist.net/images/anime/10/47347l.jpg',
+  pubg: 'https://cdn.myanimelist.net/images/anime/1441/122795l.jpg',
+  seiyuu: 'https://cdn.myanimelist.net/images/anime/1812/134736l.jpg',
+  romance: 'https://cdn.myanimelist.net/images/anime/1244/138851l.jpg',
+  tet: 'https://cdn.myanimelist.net/images/anime/1801/142390l.jpg',
+  grill: 'https://cdn.myanimelist.net/images/anime/1584/143719l.jpg',
 };
 
-// ============================================
-// 🌟 ARTÍCULOS DESTACADOS (Hero Carousel)
-// ============================================
+// 🌟 FEATURED
 export const FEATURED_ARTICLES: Article[] = [
   {
-    slug: 'jujutsu-kaisen-temporada-3-trailer',
-    title: 'Jujutsu Kaisen Temporada 3 lanza su primer tráiler oficial y confirma fecha de estreno',
-    excerpt:
-      'MAPPA reveló el esperado tráiler de la tercera temporada de Jujutsu Kaisen durante el Jump Festa. El arco del Juego de la Matanza llegará en octubre de 2026 con animación que promete superar todo lo visto hasta ahora.',
+    slug: 'pubg-mobile-naruto-shippuden',
+    title: 'PUBG MOBILE x Naruto Shippuden: todo lo que incluye la actualización 4.5, ninjutsu, skins y más',
+    excerpt: 'La colaboración más esperada del battle royale ya está aquí. Descubre todas las skins exclusivas de Naruto, Sasuke, Sakura y Kakashi, los nuevos modos de juego temáticos y cómo conseguir los objetos gratuitos del evento.',
     category: 'noticias',
-    tags: ['Jujutsu Kaisen', 'MAPPA', 'Tráiler', 'Shonen'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-09',
-    image: IMG.jujutsuS2,
-    imageAlt: 'Visual de la temporada 2 de Jujutsu Kaisen — Arco de Shibuya',
-    featured: true,
-    featuredOrder: 1,
-    readingTime: 4,
-    seo: {
-      keywords: ['Jujutsu Kaisen temporada 3', 'tráiler Jujutsu Kaisen', 'MAPPA'],
-    },
-    affiliateProducts: [
-      { name: 'Figura Yuji Itadori — Banpresto', link: '#', price: '$29.99', platform: 'amazon' },
-      { name: 'Manga Jujutsu Kaisen Vol. 1', link: '#', price: '$9.99', platform: 'amazon' },
-    ],
+    tags: ['PUBG', 'Naruto', 'Gaming', 'Colaboración'],
+    author: { name: 'Walking The World Anime' },
+    date: '2026-07-11',
+    image: IMG.pubg,
+    imageAlt: 'PUBG Mobile x Naruto Shippuden colaboración',
+    featured: true, featuredOrder: 1, readingTime: 5,
+    seo: { keywords: ['PUBG Mobile', 'Naruto Shippuden', 'colaboración anime', 'skins'] },
   },
   {
-    slug: 'one-piece-saga-final-anuncio',
-    title: 'One Piece: Eiichiro Oda revela detalles sobre la saga final del manga',
-    excerpt:
-      'En una entrevista exclusiva, Oda confirmó que la saga final será la más larga de toda la serie y prometió que "ningún fan quedará decepcionado con el desenlace del One Piece".',
+    slug: 'angel-next-door-anime-dub',
+    title: 'The Angel Next Door Spoils Me Rotten recibe doblaje oficial al inglés',
+    excerpt: 'El anime romántico más dulce de los últimos años finalmente tendrá versión doblada al inglés. La noticia fue confirmada por Crunchyroll junto con el anuncio de la fecha de estreno del dub.',
     category: 'noticias',
-    tags: ['One Piece', 'Eiichiro Oda', 'Manga', 'Shonen'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-08',
-    image: IMG.onePiece,
-    imageAlt: 'Arte promocional de One Piece — Los Sombrero de Paja',
-    featured: true,
-    featuredOrder: 2,
-    readingTime: 5,
-    seo: {
-      keywords: ['One Piece saga final', 'Eiichiro Oda', 'fin One Piece'],
-    },
+    tags: ['The Angel Next Door', 'Doblaje', 'Crunchyroll', 'Romance'],
+    author: { name: 'Anime News Network' },
+    date: '2026-07-11',
+    image: IMG.angel,
+    imageAlt: 'The Angel Next Door Spoils Me Rotten',
+    featured: true, featuredOrder: 2, readingTime: 3,
+    seo: { keywords: ['The Angel Next Door', 'doblaje inglés', 'anime romance'] },
   },
   {
-    slug: 'chainsaw-man-pelicula-reze',
-    title: 'Chainsaw Man: La película del arco de Reze revela fecha de estreno internacional',
-    excerpt:
-      'El arco de la Bomba llegará a la gran pantalla. MAPPA anunció que la película de Chainsaw Man se estrenará simultáneamente en Japón, Latinoamérica y España en diciembre de 2026.',
-    category: 'noticias',
-    tags: ['Chainsaw Man', 'MAPPA', 'Película', 'Reze'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-07',
-    image: IMG.chainsawMan,
-    imageAlt: 'Póster de Chainsaw Man — Denji y Pochita',
-    featured: true,
-    featuredOrder: 3,
-    readingTime: 3,
-    seo: {
-      keywords: ['Chainsaw Man película', 'arco de Reze', 'estreno Chainsaw Man'],
-    },
+    slug: 'debate-seiyuu-color-cabello',
+    title: 'El debate viral en Japón sobre el color de cabello de las seiyuus: ¿por qué algunos fans lo consideran inapropiado?',
+    excerpt: 'Una polémica sacude las redes japonesas. Fans conservadores critican a actrices de voz por teñirse el cabello de colores llamativos, mientras otros defienden su libertad de expresión. Analizamos el debate.',
+    category: 'curiosidades',
+    tags: ['Seiyuu', 'Japón', 'Debate', 'Cultura'],
+    author: { name: 'Anmo Sugoi' },
+    date: '2026-07-10',
+    image: IMG.seiyuu,
+    imageAlt: 'Seiyuus japonesas en evento de anime',
+    featured: true, featuredOrder: 3, readingTime: 6,
+    seo: { keywords: ['seiyuu', 'color cabello', 'polémica Japón', 'actrices voz'] },
   },
   {
-    slug: 'solo-leveling-temporada-2-record',
-    title: 'Solo Leveling Temporada 2 rompe récords de audiencia en Crunchyroll',
-    excerpt:
-      'El regreso de Sung Jin-Woo arrasó. La segunda temporada de Solo Leveling superó a Demon Slayer como el estreno más visto en la historia de la plataforma con más de 15 millones de visualizaciones.',
+    slug: 'lanzamientos-manga-agosto-2026',
+    title: 'Lanzamientos de manga en España: todas las novedades de Panini, Devir y Arechi para agosto 2026',
+    excerpt: 'Agosto viene cargado de lanzamientos. Panini trae nuevos tomos de Jujutsu Kaisen y Chainsaw Man, Devir apuesta por BL y Arechi sorprende con licencias inesperadas. Calendario completo.',
     category: 'noticias',
-    tags: ['Solo Leveling', 'Crunchyroll', 'Récord', 'A-1 Pictures'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-06',
-    image: IMG.soloLeveling,
-    imageAlt: 'Sung Jin-Woo en Solo Leveling Temporada 2',
-    featured: true,
-    featuredOrder: 4,
-    readingTime: 4,
-    seo: {
-      keywords: ['Solo Leveling temporada 2', 'récord Crunchyroll', 'Sung Jin-Woo'],
-    },
+    tags: ['Manga', 'Lanzamientos', 'Panini', 'Devir', 'España'],
+    author: { name: 'Ramen Para Dos' },
+    date: '2026-07-10',
+    image: IMG.manga,
+    imageAlt: 'Estantería con tomos de manga',
+    featured: true, featuredOrder: 4, readingTime: 4,
+    seo: { keywords: ['lanzamientos manga', 'agosto 2026', 'Panini', 'Devir'] },
   },
 ];
 
-// ============================================
 // 📰 NOTICIAS
-// ============================================
 export const LATEST_ARTICLES: Article[] = [
   {
-    slug: 'dandadan-segunda-temporada',
-    title: 'Dandadan confirma segunda temporada para enero 2027 con nuevo tráiler',
-    excerpt:
-      'Science SARU regresa con más acción sobrenatural. La segunda temporada de Dandadan adaptará el arco del Hombre Malvado y promete ser aún más loca que la primera.',
+    slug: 'banana-fish-netflix-agosto',
+    title: 'BANANA FISH llega a Netflix Estados Unidos en agosto con nuevo doblaje en inglés y francés',
+    excerpt: 'El clásico de culto de Akimi Yoshida regresa. Netflix prepara el estreno de BANANA FISH con doblajes exclusivos en inglés y francés para conquistar una nueva generación de fans.',
     category: 'noticias',
-    tags: ['Dandadan', 'Science SARU', 'Tráiler'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-09',
-    image: IMG.dandadan,
-    imageAlt: 'Visual de Dandadan — Momo y Okarun',
-    featured: false,
-    readingTime: 3,
+    tags: ['Banana Fish', 'Netflix', 'Doblaje', 'Clásico'],
+    author: { name: 'Anime Corner' },
+    date: '2026-07-11',
+    image: IMG.banana,
+    imageAlt: 'Ash Lynx y Eiji Okumura en Banana Fish',
+    featured: false, readingTime: 3,
   },
   {
-    slug: 'mieruko-chan-pelicula',
-    title: 'Mieruko-chan tendrá película live-action producida por Netflix',
-    excerpt:
-      'Netflix apuesta por el terror sobrenatural. La adaptación live-action de Mieruko-chan comenzará producción este año con un elenco japonés de primer nivel.',
+    slug: 'villainess-inept-interview',
+    title: 'Though I Am an Inept Villainess: entrevista con Hana Hishikawa y reseña del panel en Anime Expo',
+    excerpt: 'La actriz de voz Hana Hishikawa habla sobre su papel como la villana torpe que conquistó a los fans. Detalles exclusivos desde la Anime Expo 2026.',
     category: 'noticias',
-    tags: ['Mieruko-chan', 'Netflix', 'Live-Action'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-09',
-    image: IMG.mieruko,
-    imageAlt: 'Miko viendo fantasmas en Mieruko-chan',
-    featured: false,
-    readingTime: 3,
+    tags: ['Villainess', 'Entrevista', 'Hana Hishikawa', 'Anime Expo'],
+    author: { name: 'Anime Corner' },
+    date: '2026-07-11',
+    image: IMG.villainess,
+    imageAlt: 'Though I Am an Inept Villainess key visual',
+    featured: false, readingTime: 4,
   },
   {
-    slug: 'mejores-animes-verano-2026',
-    title: 'Top 10 animes más esperados de la temporada de Verano 2026',
-    excerpt:
-      'Desde secuelas épicas hasta nuevos originales. Analizamos los 10 estrenos que dominarán la conversación esta temporada según las encuestas en Japón.',
-    category: 'rankings',
-    tags: ['Temporada', 'Verano 2026', 'Top 10'],
-    author: { name: 'Andrea Ledesma' },
+    slug: 'tetsuryo-meet-anime',
+    title: 'Tetsuryo Meet With Tetsudou Musume revela visual, tráiler y fecha de estreno para octubre 2026',
+    excerpt: 'El esperado anime de chicas ferroviarias presenta su primer tráiler completo. El arte visual combina el diseño de personajes moe con trenes japoneses reales.',
+    category: 'noticias',
+    tags: ['Tetsuryo', 'Tráiler', 'Estreno', 'Slice of Life'],
+    author: { name: 'Anime Corner' },
+    date: '2026-07-10',
+    image: IMG.tet,
+    imageAlt: 'Tetsuryo Meet With Tetsudou Musume visual',
+    featured: false, readingTime: 3,
+  },
+  {
+    slug: 'rent-girlfriend-recurso-narrativo',
+    title: 'El recurso narrativo más odiado del anime de romance en 2026 — y Rent-a-Girlfriend es el culpable',
+    excerpt: 'La comunidad anime está harta del "malentendido que dura 12 episodios". Analizamos por qué Rent-a-Girlfriend se ha convertido en el símbolo de este tropo y qué animes de romance lo están haciendo bien.',
+    category: 'curiosidades',
+    tags: ['Romance', 'Rent-a-Girlfriend', 'Tropos', 'Análisis'],
+    author: { name: 'Anmo Sugoi' },
+    date: '2026-07-10',
+    image: IMG.romance,
+    imageAlt: 'Chizuru y Kazuya en Rent-a-Girlfriend',
+    featured: false, readingTime: 5,
+  },
+  {
+    slug: 'how-to-grill-love-manga-ends',
+    title: 'How to Grill Our Love: el manga de cocina y romance llega a su final',
+    excerpt: 'El manga que combinaba recetas de barbacoa con una dulce historia de amor anuncia su capítulo final. Los fans se despiden de Kenta y Chihiro tras 8 volúmenes.',
+    category: 'noticias',
+    tags: ['Manga', 'Final', 'Cocina', 'Romance'],
+    author: { name: 'Anime News Network' },
+    date: '2026-07-10',
+    image: IMG.grill,
+    imageAlt: 'How to Grill Our Love portada manga',
+    featured: false, readingTime: 2,
+  },
+  {
+    slug: 'milky-subway-short-anime',
+    title: 'Milky☆Subway: The Galactic Limited Express tendrá nuevo anime corto',
+    excerpt: 'El peculiar anime sobre un tren espacial interestelar anuncia una nueva entrega. La serie corta promete más aventuras surrealistas a bordo de la línea galáctica.',
+    category: 'noticias',
+    tags: ['Milky Subway', 'Corto', 'Original', 'Sci-Fi'],
+    author: { name: 'Anime News Network' },
+    date: '2026-07-09',
+    image: IMG.tet,
+    imageAlt: 'Milky Subway anime visual',
+    featured: false, readingTime: 2,
+  },
+  {
+    slug: 'jujutsu-kaisen-panini-agosto',
+    title: 'Jujutsu Kaisen y Chainsaw Man lideran los lanzamientos de Panini Manga para agosto 2026',
+    excerpt: 'Panini revela su catálogo de agosto. Nuevos tomos de Jujutsu Kaisen, Chainsaw Man y Spy x Family encabezan un mes cargado de novedades para los mangalovers españoles.',
+    category: 'noticias',
+    tags: ['Jujutsu Kaisen', 'Chainsaw Man', 'Panini', 'Manga'],
+    author: { name: 'Walking The World Anime' },
+    date: '2026-07-09',
+    image: IMG.jjk,
+    imageAlt: 'Tomos de Jujutsu Kaisen y Chainsaw Man',
+    featured: false, readingTime: 3,
+  },
+  {
+    slug: 'naruto-pubg-ninjutsu-skins',
+    title: 'Todas las skins del evento Naruto Shippuden x PUBG Mobile: cómo conseguirlas gratis',
+    excerpt: 'Guía completa del evento de colaboración. Te explicamos cómo desbloquear las skins de Naruto, Sasuke, Sakura y Kakashi sin gastar dinero real en PUBG Mobile.',
+    category: 'guias',
+    tags: ['Naruto', 'PUBG Mobile', 'Guía', 'Gratis'],
+    author: { name: 'Walking The World Anime' },
+    date: '2026-07-09',
+    image: IMG.naruto,
+    imageAlt: 'Naruto y equipo 7 en estilo PUBG',
+    featured: false, readingTime: 6,
+  },
+  {
+    slug: 'arechi-manga-sorpresas-agosto',
+    title: 'Arechi Manga sorprende con nuevas licencias para agosto 2026',
+    excerpt: 'La editorial independiente Arechi anuncia tres nuevas licencias que nadie esperaba. Desde un seinen psicológico hasta un slice of life rural, repasamos las apuestas más arriesgadas del mes.',
+    category: 'noticias',
+    tags: ['Arechi', 'Manga', 'Licencias', 'España'],
+    author: { name: 'Walking The World Anime' },
     date: '2026-07-08',
-    image: IMG.spyFamily,
-    imageAlt: 'Collage de animes verano 2026',
-    featured: false,
-    readingTime: 6,
-  },
-  {
-    slug: 'demon-slayer-arco-castillo-infinito',
-    title: 'Demon Slayer: Tráiler del arco del Castillo Infinito revela animación impresionante',
-    excerpt:
-      'Ufotable vuelve a superarse. El tráiler de la trilogía del Castillo Infinito muestra una calidad de animación que deja sin palabras a los fans de Kimetsu no Yaiba.',
-    category: 'noticias',
-    tags: ['Demon Slayer', 'Ufotable', 'Película', 'Castillo Infinito'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-07',
-    image: IMG.demonSlayer,
-    imageAlt: 'Tanjiro en Demon Slayer — Arco del Castillo Infinito',
-    featured: false,
-    readingTime: 4,
-  },
-  {
-    slug: 'spy-family-pelicula-codigo-blanco',
-    title: 'Spy x Family: Código Blanco se convierte en la película más taquillera del año en Japón',
-    excerpt:
-      'La familia Forger conquista la taquilla japonesa. La película original de Spy x Family superó los 6 mil millones de yenes en su primer mes en cartelera.',
-    category: 'noticias',
-    tags: ['Spy x Family', 'Película', 'Taquilla', 'WIT Studio'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-06',
-    image: IMG.spyFamily,
-    imageAlt: 'La familia Forger en Spy x Family: Código Blanco',
-    featured: false,
-    readingTime: 3,
-  },
-  {
-    slug: 'oshi-no-ko-temporada-3',
-    title: 'Oshi no Ko Temporada 3 confirma fecha de estreno con nuevo avance',
-    excerpt:
-      'El fenómeno de Doga Kobo continúa. La tercera temporada de Oshi no Ko se estrenará en enero de 2027 y adaptará uno de los arcos más impactantes del manga.',
-    category: 'noticias',
-    tags: ['Oshi no Ko', 'Doga Kobo', 'Estreno'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-05',
-    image: IMG.oshiNoKo,
-    imageAlt: 'Ai Hoshino y Aqua en Oshi no Ko',
-    featured: false,
-    readingTime: 3,
-  },
-  {
-    slug: 'ofertas-figuras-julio-2026',
-    title: 'Las mejores ofertas en figuras de anime — Julio 2026',
-    excerpt:
-      'Recopilamos las mejores ofertas en figuras, nendoroids y estatuas de tus animes favoritos. Hasta 40% de descuento en Amazon, AmiAmi y CDJapan.',
-    category: 'noticias',
-    tags: ['Ofertas', 'Figuras', 'Coleccionismo'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-07-02',
-    image: IMG.demonSlayer,
-    imageAlt: 'Colección de figuras de anime',
-    featured: false,
-    readingTime: 5,
-    affiliateProducts: [
-      { name: 'Nendoroid Tanjiro', link: '#', price: '$49.99', platform: 'amazon' },
-      { name: 'Figura Goku Ultra Instinct', link: '#', price: '$34.99', platform: 'amazon' },
-    ],
+    image: IMG.manga,
+    imageAlt: 'Logotipo de Arechi Manga',
+    featured: false, readingTime: 3,
   },
 ];
 
-// ============================================
 // 💡 CURIOSIDADES
-// ============================================
 export const CURIOSIDADES: Article[] = [
   {
     slug: 'curiosidades-dragon-ball',
     title: '15 curiosidades de Dragon Ball que probablemente no conocías',
-    excerpt:
-      '¿Sabías que originalmente Goku iba a ser un mono literal? Descubre datos fascinantes sobre la obra maestra de Akira Toriyama que sorprenderán hasta a los fans más veteranos.',
+    excerpt: '¿Sabías que originalmente Goku iba a ser un mono literal? Descubre datos fascinantes sobre la obra maestra de Akira Toriyama.',
     category: 'curiosidades',
     tags: ['Dragon Ball', 'Curiosidades', 'Akira Toriyama'],
-    author: { name: 'Andrea Ledesma' },
+    author: { name: 'Walking The World Anime' },
     date: '2026-07-07',
-    image: IMG.dragonBall,
+    image: 'https://cdn.myanimelist.net/images/anime/7/74606l.jpg',
     imageAlt: 'Goku en modo Super Saiyan — Dragon Ball Super',
-    featured: false,
-    readingTime: 8,
+    featured: false, readingTime: 8,
   },
   {
     slug: 'secretos-estudio-ghibli',
     title: '10 secretos del Studio Ghibli que te harán ver sus películas con otros ojos',
-    excerpt:
-      'Desde mensajes ocultos en El Viaje de Chihiro hasta el verdadero significado de Mi Vecino Totoro. Secretos que Hayao Miyazaki escondió en sus obras maestras.',
+    excerpt: 'Desde mensajes ocultos en El Viaje de Chihiro hasta el verdadero significado de Mi Vecino Totoro.',
     category: 'curiosidades',
-    tags: ['Studio Ghibli', 'Hayao Miyazaki', 'Curiosidades', 'Cine'],
-    author: { name: 'Andrea Ledesma' },
+    tags: ['Studio Ghibli', 'Hayao Miyazaki', 'Curiosidades'],
+    author: { name: 'Walking The World Anime' },
     date: '2026-07-05',
-    image: IMG.frieren, // Ghibli image not in our set, using another atmospheric image
+    image: IMG.villainess,
     imageAlt: 'Escena emblemática del Studio Ghibli',
-    featured: false,
-    readingTime: 7,
+    featured: false, readingTime: 7,
   },
   {
     slug: 'simbolos-ocultos-evangelion',
     title: 'Neon Genesis Evangelion: El significado oculto detrás de sus símbolos religiosos',
-    excerpt:
-      'Cruces, ángeles, árboles de la vida... Hideaki Anno llenó Evangelion de simbolismo judeocristiano. Te explicamos qué significa realmente cada símbolo.',
+    excerpt: 'Cruces, ángeles, árboles de la vida... Hideaki Anno llenó Evangelion de simbolismo judeocristiano.',
     category: 'curiosidades',
-    tags: ['Evangelion', 'Hideaki Anno', 'Simbolismo', 'Mecha'],
-    author: { name: 'Andrea Ledesma' },
+    tags: ['Evangelion', 'Hideaki Anno', 'Simbolismo'],
+    author: { name: 'Walking The World Anime' },
     date: '2026-07-03',
-    image: IMG.evangelion,
+    image: 'https://cdn.myanimelist.net/images/anime/1314/108941l.jpg',
     imageAlt: 'Shinji y el EVA-01 en Neon Genesis Evangelion',
-    featured: false,
-    readingTime: 9,
+    featured: false, readingTime: 9,
   },
   {
     slug: 'origen-nombre-attack-on-titan',
     title: '¿Por qué se llama Attack on Titan? El origen del nombre y otros datos de la obra de Isayama',
-    excerpt:
-      'El título es solo la punta del iceberg. Descubre las inspiraciones históricas, los nombres con doble sentido y las referencias culturales que esconde Shingeki no Kyojin.',
+    excerpt: 'Descubre las inspiraciones históricas, los nombres con doble sentido y las referencias culturales.',
     category: 'curiosidades',
     tags: ['Attack on Titan', 'Hajime Isayama', 'Curiosidades'],
-    author: { name: 'Andrea Ledesma' },
+    author: { name: 'Walking The World Anime' },
     date: '2026-07-01',
-    image: IMG.aot,
+    image: IMG.banana,
     imageAlt: 'Eren Jaeger y el Titán de Ataque',
-    featured: false,
-    readingTime: 6,
+    featured: false, readingTime: 6,
   },
   {
     slug: 'death-note-datos-reales',
     title: 'Death Note: 12 reglas de la Death Note que los fans olvidaron y datos increíbles',
-    excerpt:
-      '¿Recuerdas todas las reglas de la libreta? Repasamos las más olvidadas y los datos más sorprendentes sobre la obra maestra de Tsugumi Ohba y Takeshi Obata.',
+    excerpt: 'Repasamos las reglas más olvidadas y los datos más sorprendentes sobre la obra de Tsugumi Ohba.',
     category: 'curiosidades',
     tags: ['Death Note', 'Curiosidades', 'Tsugumi Ohba'],
-    author: { name: 'Andrea Ledesma' },
+    author: { name: 'Walking The World Anime' },
     date: '2026-06-29',
-    image: IMG.deathNote,
+    image: 'https://cdn.myanimelist.net/images/anime/9/9453l.jpg',
     imageAlt: 'Light Yagami y Ryuk en Death Note',
-    featured: false,
-    readingTime: 7,
+    featured: false, readingTime: 7,
   },
   {
     slug: 'hunter-x-hunter-hiatus',
     title: 'Hunter x Hunter: La historia detrás del hiatus más famoso del manga',
-    excerpt:
-      'Los problemas de salud de Yoshihiro Togashi, su lucha por continuar y el amor incondicional de los fans. La verdadera razón por la que HxH sigue en pausa.',
+    excerpt: 'Los problemas de salud de Yoshihiro Togashi, su lucha por continuar y el amor incondicional de los fans.',
     category: 'curiosidades',
-    tags: ['Hunter x Hunter', 'Yoshihiro Togashi', 'Manga', 'Hiatus'],
-    author: { name: 'Andrea Ledesma' },
+    tags: ['Hunter x Hunter', 'Yoshihiro Togashi', 'Hiatus'],
+    author: { name: 'Walking The World Anime' },
     date: '2026-06-27',
-    image: IMG.hunterXHunter,
+    image: 'https://cdn.myanimelist.net/images/anime/1337/99013l.jpg',
     imageAlt: 'Gon y Killua en Hunter x Hunter',
-    featured: false,
-    readingTime: 6,
-  },
-  {
-    slug: 'naruto-inspiraciones-mitologicas',
-    title: 'Naruto: Las criaturas mitológicas japonesas que inspiraron a los Bijuus y más',
-    excerpt:
-      'El Kyubi, Shukaku, Susanoo... Kishimoto se inspiró profundamente en la mitología japonesa. Te contamos las historias reales detrás de cada bestia con cola.',
-    category: 'curiosidades',
-    tags: ['Naruto', 'Masashi Kishimoto', 'Mitología', 'Bijuu'],
-    author: { name: 'Andrea Ledesma' },
-    date: '2026-06-25',
-    image: IMG.naruto,
-    imageAlt: 'Naruto Uzumaki en modo Sabio',
-    featured: false,
-    readingTime: 8,
+    featured: false, readingTime: 6,
   },
 ];
 
-// ============================================
-// 📚 UTILIDADES
-// ============================================
 export function getAllArticles(): Article[] {
   return [...FEATURED_ARTICLES, ...LATEST_ARTICLES, ...CURIOSIDADES];
 }
-
 export function getArticleBySlug(slug: string): Article | undefined {
   return getAllArticles().find((a) => a.slug === slug);
 }
-
-export function getArticlesByCategory(category: string): Article[] {
-  return getAllArticles().filter((a) => a.category === category);
+export function getArticlesByCategory(cat: string): Article[] {
+  return getAllArticles().filter((a) => a.category === cat);
 }
-
 export function getRelatedArticles(slug: string, limit = 4): Article[] {
   const current = getArticleBySlug(slug);
   if (!current) return [];
   return getAllArticles()
     .filter((a) => a.slug !== slug)
     .sort((a, b) => {
-      const aMatch = a.category === current.category ? 1 : 0;
-      const bMatch = b.category === current.category ? 1 : 0;
-      const aTags = a.tags.filter((t) => current.tags.includes(t)).length;
-      const bTags = b.tags.filter((t) => current.tags.includes(t)).length;
-      return bMatch + bTags - (aMatch + aTags);
+      const aM = a.category === current.category ? 1 : 0;
+      const bM = b.category === current.category ? 1 : 0;
+      return bM - aM;
     })
     .slice(0, limit);
 }
-
 export function searchArticles(query: string): Article[] {
   const q = query.toLowerCase();
   return getAllArticles().filter(
