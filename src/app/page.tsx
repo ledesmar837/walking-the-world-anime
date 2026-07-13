@@ -3,6 +3,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Sidebar from '@/components/layout/Sidebar';
 import HeroCarousel from '@/components/home/HeroCarousel';
+import ShopHeroBanner from '@/components/shop/ShopHeroBanner';
 import { ArticleCard } from '@/components/article/ArticleCard';
 import { SectionHeading } from '@/components/ui/primitives';
 import { FEATURED_ARTICLES } from '@/lib/articles';
@@ -24,6 +25,9 @@ export default async function HomePage() {
 
       <main className="flex-1">
         <div className="container-main py-8">
+          {/* ===== SHOP HERO BANNER ===== */}
+          <ShopHeroBanner />
+
           {/* ===== HERO CAROUSEL ===== */}
           <HeroCarousel slides={FEATURED_ARTICLES} />
 

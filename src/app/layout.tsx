@@ -3,6 +3,7 @@ import { ThemeProvider } from '@/lib/theme';
 import { SITE_CONFIG } from '@/content/config/site';
 import { Analytics } from '@/components/analytics/Analytics';
 import { ConsentBanner } from '@/components/analytics/ConsentBanner';
+import ShopPopup from '@/components/shop/ShopPopup';
 import '@/app/globals.css';
 
 export const metadata: Metadata = {
@@ -91,9 +92,19 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col antialiased">
+      <body
+        className="min-h-screen flex flex-col antialiased bg-fixed"
+        style={{
+          backgroundImage: 'url(/images/wk.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+        }}
+      >
         <Analytics />
         <ConsentBanner />
+        <ShopPopup />
         <ThemeProvider>
           {children}
         </ThemeProvider>
