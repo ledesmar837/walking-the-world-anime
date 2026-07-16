@@ -1,50 +1,69 @@
 {
   "products": [
     {
-      "app_sale_price": "104.78",
-      "original_price": "30.32",
-      "product_detail_url": "https://www.aliexpress.com/item/1005012371745403.html?pdp_npi=6%40dis%21USD%2132.35%2115.53%21%21%21218.30%21104.78%21%40210152bd17839827570006005e1214%2112000058201531824%21affd%21%21%21%211%210%21",
-      "product_small_image_urls": {
-        "string": [
-          "https://ae-pic-a1.aliexpress-media.com/kf/S06276a36385d4544866b17208ddaf993t.jpg",
-          "https://ae-pic-a1.aliexpress-media.com/kf/S7c2de2b02cf34dc0a2abc106ad4b5a32N.jpg",
-          "https://ae-pic-a1.aliexpress-media.com/kf/Sad07a480fb3b41c29c379ee0b7f2d49cZ.jpg",
-          "https://ae-pic-a1.aliexpress-media.com/kf/Sd71a1e375c5b4fd4a990ce8f5f17a1cbC.jpg",
-          "https://ae-pic-a1.aliexpress-media.com/kf/Sd51bf5cc88954c08ab317ef1359708653.jpg",
-          "https://ae-pic-a1.aliexpress-media.com/kf/Seccd1e10dad34f13b27e858b282640b1Z.jpg"
-        ]
-      },
-      "second_level_category_name": "Action & Toy Figures",
-      "target_sale_price": "15.53",
-      "second_level_category_id": 201292714,
-      "discount": "52%",
-      "product_main_image_url": "https://ae-pic-a1.aliexpress-media.com/kf/S06276a36385d4544866b17208ddaf993t.jpg",
-      "first_level_category_id": 26,
-      "target_sale_price_currency": "USD",
-      "target_app_sale_price_currency": "USD",
-      "tax_rate": "0.00",
-      "original_price_currency": "CNY",
-      "shop_url": "https://www.aliexpress.com/store/1105583097",
-      "target_original_price_currency": "USD",
-      "product_id": 1005012371745403,
-      "target_original_price": "32.35",
-      "product_video_url": "",
-      "first_level_category_name": "Toys & Hobbies",
-      "promotion_link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxwrMLTMhPYue5yqD3oUmcwlida3QMvro0MHMo5eLCDrT5UGI8gjAkNhEdTa60ILQt6138kjAoztIomBYrkTXZBOTcVtlPj658lsnNw55qAYDaDzd9sEil2V17XYMlyAW7tWV7Rc2RRwFKVNtFrPge8q7v4YylNAYIfxHvAkS3LUB8HbZNigJsDjDRa8BRZdkQxwSnv3Z46R51KOykMqWp1caEAWMylE6fN7IeUGvlGopPQ1AdZsHtps9KCbf0EWEYVk7cyFFCbpg5MjzFCCmtxRDS6H7sE3oqT2zbazRNQaS05lkMFDyyIqAmxJA7L5gWYjYT09PwIIGr0hUwJSRxbWy8byred0OJuaq06clvVCPvpsaB61AoD1sWKyVWW2zrTbVQZ0DEcecznzovP59QxS7wyCNMHY1MepIRe1qjepWQMHRUHGTopqWNQB8otuHxcyud85ikRTwhkejxw0f0VSU8JgcnyTK3fQvFlve3UNEExOhjDm9RfDth6iIAmkjS8o3IFLS4U4r9A86LZTIrFYfjm4DdDnFzzQ9MhpTdIM2VkPjdH1acW5t7DHcmMmubciNEBSG9Rizdu9wOPF5jy8tXuMfdvDXCLLqbVyEhFxGU0L1kkpya1BXIGOTwb670uMS0LYcHwNtHPe0TbeWFNZZ",
-      "sku_id": 12000058201531824,
-      "evaluate_rate": "100.0%",
-      "shop_name": "Anime Figure GK Store",
-      "sale_price": "14.55",
-      "product_title": "21cm Anime Bleach Figure Kurosaki Ichigo Aizen Figurine Statue Model PVC Collection Desktop Action Figure Toy Kid Gifts",
-      "hot_product_commission_rate": "0.0%",
-      "shop_id": 1105583097,
-      "app_sale_price_currency": "CNY",
-      "sale_price_currency": "CNY",
-      "lastest_volume": 6,
-      "target_app_sale_price": "15.53",
-      "commission_rate": "7.0%"
+      "product_id": "bleach-ichigo-figure",
+      "product_title": "Figura Bleach Ichigo Kurosaki — Guerra de los Mil Años PVC Estatua",
+      "product_main_image_url": "https://cdn.myanimelist.net/images/anime/1908/135431l.jpg",
+      "original_price": "39.99", "sale_price": "18.80", "discount": "53%",
+      "evaluate_rate": "4.7", "lastest_volume": 280,
+      "product_detail_url": "https://s.click.aliexpress.com/e/_c3ia2riT",
+      "promotion_link": "https://s.click.aliexpress.com/e/_c3ia2riT"
+    },
+    {
+      "product_id": "bleach-mystery-box",
+      "product_title": "Caja Sorpresa Figuras BLEACH — Juguete Coleccionable Aleatorio",
+      "product_main_image_url": "https://cdn.myanimelist.net/images/anime/1908/135431l.jpg",
+      "original_price": "7.01", "sale_price": "7.01", "discount": "0%",
+      "evaluate_rate": "4.3", "lastest_volume": 340,
+      "product_detail_url": "https://s.click.aliexpress.com/e/_c3J97qSR",
+      "promotion_link": "https://s.click.aliexpress.com/e/_c3J97qSR"
+    },
+    {
+      "product_id": "bleach-gt-ichigo",
+      "product_title": "Dasin Bleach Kurosaki Ichigo Aizen Sousuke — SHF Figura Colección",
+      "product_main_image_url": "https://cdn.myanimelist.net/images/anime/1908/135431l.jpg",
+      "original_price": "88.25", "sale_price": "62.66", "discount": "29%",
+      "evaluate_rate": "4.9", "lastest_volume": 150,
+      "product_detail_url": "https://s.click.aliexpress.com/e/_c4SxiKxt",
+      "promotion_link": "https://s.click.aliexpress.com/e/_c4SxiKxt"
+    },
+    {
+      "product_id": "bleach-hitsugaya",
+      "product_title": "Figura Toshiro Hitsugaya 28 cm — Bleach GK PVC Estatua Anime",
+      "product_main_image_url": "https://cdn.myanimelist.net/images/anime/1908/135431l.jpg",
+      "original_price": "79.38", "sale_price": "42.07", "discount": "47%",
+      "evaluate_rate": "4.6", "lastest_volume": 110,
+      "product_detail_url": "https://s.click.aliexpress.com/e/_c3RQ6oj1",
+      "promotion_link": "https://s.click.aliexpress.com/e/_c3RQ6oj1"
+    },
+    {
+      "product_id": "bleach-mugetsu",
+      "product_title": "Figura Bleach Final Getsuga Mugetsu 33 cm — PVC GK Estatua",
+      "product_main_image_url": "https://cdn.myanimelist.net/images/anime/1908/135431l.jpg",
+      "original_price": "163.21", "sale_price": "89.77", "discount": "45%",
+      "evaluate_rate": "4.8", "lastest_volume": 90,
+      "product_detail_url": "https://s.click.aliexpress.com/e/_c3X8J1th",
+      "promotion_link": "https://s.click.aliexpress.com/e/_c3X8J1th"
+    },
+    {
+      "product_id": "bleach-tshirt",
+      "product_title": "Camiseta Bleach Kurosaki Ichigo — Vintage Oversize 100% Algodón",
+      "product_main_image_url": "https://cdn.myanimelist.net/images/anime/1908/135431l.jpg",
+      "original_price": "21.23", "sale_price": "21.23", "discount": "0%",
+      "evaluate_rate": "4.2", "lastest_volume": 180,
+      "product_detail_url": "https://s.click.aliexpress.com/e/_c4T82RaT",
+      "promotion_link": "https://s.click.aliexpress.com/e/_c4T82RaT"
+    },
+    {
+      "product_id": "bleach-cape",
+      "product_title": "Capa Bleach Ichigo — Guerra de Sangre Mil Años, Alambre Hierro 1/12",
+      "product_main_image_url": "https://cdn.myanimelist.net/images/anime/1908/135431l.jpg",
+      "original_price": "25.50", "sale_price": "25.50", "discount": "0%",
+      "evaluate_rate": "4.5", "lastest_volume": 65,
+      "product_detail_url": "https://s.click.aliexpress.com/e/_c31PW2bD",
+      "promotion_link": "https://s.click.aliexpress.com/e/_c31PW2bD"
     }
   ],
-  "updatedAt": "2026-07-13T22:45:58.278Z",
+  "updatedAt": "2026-07-12T00:00:00Z",
   "category": "bleach"
 }
