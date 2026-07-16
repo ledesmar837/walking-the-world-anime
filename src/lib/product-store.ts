@@ -78,20 +78,12 @@ async function searchMultiQueries(queries: string[]): Promise<AliExpressProduct[
 }
 
 export async function getProductsByCategory(slug: string, forceRefresh = false): Promise<AliExpressProduct[]> {
+  const cache = readCache(slug);
+  if (!cache || cache.products.length === 0) return [];
   if (!forceRefresh && isCacheValid(slug)) {
-    const cache = readCache(slug);
-    if (cache) return cache.products.map(normalizeProduct).slice(0, PRODUCT_CONFIG.productsPerCategory);
+    return cache.products.map(normalizeProduct).slice(0, PRODUCT_CONFIG.productsPerCategory);
   }
-  const category = PRODUCT_CATEGORIES.find((c) => c.slug === slug);
-  if (!category) return [];
-  try {
-    const products = await searchMultiQueries(category.searchQueries);
-    if (products.length > 0) writeCache(slug, products);
-    return products.slice(0, PRODUCT_CONFIG.productsPerCategory);
-  } catch {
-    const old = readCache(slug);
-    return old ? old.products.map(normalizeProduct).slice(0, PRODUCT_CONFIG.productsPerCategory) : [];
-  }
+  return cache.products.map(normalizeProduct).slice(0, PRODUCT_CONFIG.productsPerCategory);
 }
 
 // Top 5 categorías para Home
