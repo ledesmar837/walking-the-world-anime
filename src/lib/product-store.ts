@@ -42,7 +42,6 @@ function isCacheValid(slug: string): boolean {
   if (!cache) return false;
   return Date.now() - new Date(cache.updatedAt).getTime() < PRODUCT_CONFIG.cacheTTL;
 }
-
 function normalizeProduct(raw: Record<string, unknown>): AliExpressProduct {
   return {
     productId: String(raw.product_id || raw.productId || ''),
