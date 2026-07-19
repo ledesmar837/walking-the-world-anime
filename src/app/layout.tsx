@@ -3,6 +3,7 @@ import { ThemeProvider } from '@/lib/theme';
 import { SITE_CONFIG } from '@/content/config/site';
 import { Analytics } from '@/components/analytics/Analytics';
 import { ConsentBanner } from '@/components/analytics/ConsentBanner';
+import Script from 'next/script';
 import ShopPopup from '@/components/shop/ShopPopup';
 import '@/app/globals.css';
 
@@ -56,12 +57,12 @@ export default function RootLayout({
   return (
     <html lang="es" className="dark" suppressHydrationWarning>
       <head>
-        {/* Google AdSense — descomentar cuando se active */}
-        {/* <script
-          async
+        {/* Google AdSense */}
+        <Script
+          strategy="afterInteractive"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE_CONFIG.adsense.publisherId}`}
           crossOrigin="anonymous"
-        /> */}
+        />
         {/* Preload fonts */}
         <link
           rel="preconnect"
