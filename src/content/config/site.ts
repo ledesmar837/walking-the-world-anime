@@ -21,7 +21,7 @@ export const SITE_CONFIG: SiteConfig = {
     telegram: 'https://t.me/walkingtheworldanime',
   },
   adsense: {
-    publisherId: 'ca-pub-XXXXXXXXXXXX', // Reemplazar con ID real
+    publisherId: 'ca-pub-1775813292924641', // Reemplazar con ID real
     slots: {
       banner: '0000000000',
       sidebar: '0000000000',
