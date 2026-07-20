@@ -186,7 +186,7 @@ export const LATEST_ARTICLES: Article[] = [
     slug: 'naruto-pubg-ninjutsu-skins',
     title: 'Todas las skins del evento Naruto Shippuden x PUBG Mobile: cómo conseguirlas gratis',
     excerpt: 'Guía completa del evento de colaboración. Te explicamos cómo desbloquear las skins de Naruto, Sasuke, Sakura y Kakashi sin gastar dinero real en PUBG Mobile.',
-    category: 'guias',
+    category: 'noticias',
     tags: ['Naruto', 'PUBG Mobile', 'Guía', 'Gratis'],
     author: { name: 'Walking The World Anime' },
     date: '2026-07-09',
