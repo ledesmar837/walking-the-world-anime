@@ -66,10 +66,10 @@ export default async function HomePage() {
               />
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-12">
                 {[
-                  { title: 'Jujutsu Kaisen S2', date: 'Jul 2023', img: 'https://cdn.myanimelist.net/images/anime/1792/138022l.jpg' },
-                  { title: 'Oshi no Ko', date: 'Abr 2023', img: 'https://cdn.myanimelist.net/images/anime/1812/134736l.jpg' },
-                  { title: 'Spy x Family', date: 'Abr 2022', img: 'https://cdn.myanimelist.net/images/anime/1441/122795l.jpg' },
-                  { title: 'Mushoku Tensei', date: 'Ene 2021', img: 'https://cdn.myanimelist.net/images/anime/1530/117776l.jpg' },
+                  { title: 'Mushoku Tensei III', date: 'Jul 2026', img: 'https://cdn.myanimelist.net/images/anime/1527/158340l.jpg' },
+                  { title: 'Youjo Senki II', date: 'Jul 2026', img: 'https://cdn.myanimelist.net/images/anime/1917/158371l.jpg' },
+                  { title: 'Bleach TYBW Final', date: 'Jul 2026', img: 'https://cdn.myanimelist.net/images/anime/1275/158595l.jpg' },
+                  { title: 'Grand Blue S3', date: 'Jul 2026', img: 'https://cdn.myanimelist.net/images/anime/1615/158194l.jpg' },
                 ].map((anime) => (
                   <Link
                     key={anime.title}

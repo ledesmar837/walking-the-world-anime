@@ -5,17 +5,39 @@
 import type { Article } from '@/lib/types';
 
 const IMG = {
+  // Imágenes CORRECTAS de cada anime en MyAnimeList
   jjk: 'https://cdn.myanimelist.net/images/anime/1792/138022l.jpg',
   naruto: 'https://cdn.myanimelist.net/images/anime/13/17405l.jpg',
+  // The Angel Next Door Spoils Me Rotten
   angel: 'https://cdn.myanimelist.net/images/anime/1530/117776l.jpg',
+  // Frieren (imagen genérica para villainess mientras)
   villainess: 'https://cdn.myanimelist.net/images/anime/1015/138006l.jpg',
+  // Demon Slayer (imagen genérica para manga)
   manga: 'https://cdn.myanimelist.net/images/anime/1286/99889l.jpg',
+  // BANANA FISH
   banana: 'https://cdn.myanimelist.net/images/anime/10/47347l.jpg',
+  // Spy x Family (PUBG x Naruto)
   pubg: 'https://cdn.myanimelist.net/images/anime/1441/122795l.jpg',
+  // Oshi no Ko (seiyuu debate)
   seiyuu: 'https://cdn.myanimelist.net/images/anime/1812/134736l.jpg',
+  // Rent-a-Girlfriend
   romance: 'https://cdn.myanimelist.net/images/anime/1244/138851l.jpg',
+  // Solo Leveling (Tetsuryo Meet)
   tet: 'https://cdn.myanimelist.net/images/anime/1801/142390l.jpg',
+  // Dandadan (How to Grill Our Love)
   grill: 'https://cdn.myanimelist.net/images/anime/1584/143719l.jpg',
+  // Studio Ghibli - El Viaje de Chihiro
+  ghibli: 'https://cdn.myanimelist.net/images/anime/6/79597l.jpg',
+  // Attack on Titan
+  aot: 'https://cdn.myanimelist.net/images/anime/10/47347l.jpg',
+  // Dragon Ball Super
+  dbz: 'https://cdn.myanimelist.net/images/anime/7/74606l.jpg',
+  // Evangelion
+  eva: 'https://cdn.myanimelist.net/images/anime/1314/108941l.jpg',
+  // Death Note
+  deathnote: 'https://cdn.myanimelist.net/images/anime/9/9453l.jpg',
+  // Hunter x Hunter
+  hxh: 'https://cdn.myanimelist.net/images/anime/1337/99013l.jpg',
 };
 
 // 🌟 FEATURED
@@ -74,7 +96,7 @@ export const FEATURED_ARTICLES: Article[] = [
   },
 ];
 
-// 📰 NOTICIAS
+// 📰 NOTICIAS — ordenadas de más nueva a más antigua
 export const LATEST_ARTICLES: Article[] = [
   {
     slug: 'banana-fish-netflix-agosto',
@@ -83,7 +105,7 @@ export const LATEST_ARTICLES: Article[] = [
     category: 'noticias',
     tags: ['Banana Fish', 'Netflix', 'Doblaje', 'Clásico'],
     author: { name: 'Anime Corner' },
-    date: '2026-07-11',
+    date: '2026-07-12',
     image: IMG.banana,
     imageAlt: 'Ash Lynx y Eiji Okumura en Banana Fish',
     featured: false, readingTime: 3,
@@ -95,7 +117,7 @@ export const LATEST_ARTICLES: Article[] = [
     category: 'noticias',
     tags: ['Villainess', 'Entrevista', 'Hana Hishikawa', 'Anime Expo'],
     author: { name: 'Anime Corner' },
-    date: '2026-07-11',
+    date: '2026-07-12',
     image: IMG.villainess,
     imageAlt: 'Though I Am an Inept Villainess key visual',
     featured: false, readingTime: 4,
@@ -107,7 +129,7 @@ export const LATEST_ARTICLES: Article[] = [
     category: 'noticias',
     tags: ['Tetsuryo', 'Tráiler', 'Estreno', 'Slice of Life'],
     author: { name: 'Anime Corner' },
-    date: '2026-07-10',
+    date: '2026-07-11',
     image: IMG.tet,
     imageAlt: 'Tetsuryo Meet With Tetsudou Musume visual',
     featured: false, readingTime: 3,
@@ -119,7 +141,7 @@ export const LATEST_ARTICLES: Article[] = [
     category: 'curiosidades',
     tags: ['Romance', 'Rent-a-Girlfriend', 'Tropos', 'Análisis'],
     author: { name: 'Anmo Sugoi' },
-    date: '2026-07-10',
+    date: '2026-07-11',
     image: IMG.romance,
     imageAlt: 'Chizuru y Kazuya en Rent-a-Girlfriend',
     featured: false, readingTime: 5,
@@ -143,8 +165,8 @@ export const LATEST_ARTICLES: Article[] = [
     category: 'noticias',
     tags: ['Milky Subway', 'Corto', 'Original', 'Sci-Fi'],
     author: { name: 'Anime News Network' },
-    date: '2026-07-09',
-    image: IMG.tet,
+    date: '2026-07-10',
+    image: 'https://cdn.myanimelist.net/images/anime/1986/157126l.jpg',
     imageAlt: 'Milky Subway anime visual',
     featured: false, readingTime: 2,
   },
@@ -196,7 +218,7 @@ export const CURIOSIDADES: Article[] = [
     tags: ['Dragon Ball', 'Curiosidades', 'Akira Toriyama'],
     author: { name: 'Walking The World Anime' },
     date: '2026-07-07',
-    image: 'https://cdn.myanimelist.net/images/anime/7/74606l.jpg',
+    image: IMG.dbz,
     imageAlt: 'Goku en modo Super Saiyan — Dragon Ball Super',
     featured: false, readingTime: 8,
   },
@@ -208,8 +230,8 @@ export const CURIOSIDADES: Article[] = [
     tags: ['Studio Ghibli', 'Hayao Miyazaki', 'Curiosidades'],
     author: { name: 'Walking The World Anime' },
     date: '2026-07-05',
-    image: IMG.villainess,
-    imageAlt: 'Escena emblemática del Studio Ghibli',
+    image: IMG.ghibli,
+    imageAlt: 'Escena emblemática de El Viaje de Chihiro — Studio Ghibli',
     featured: false, readingTime: 7,
   },
   {
@@ -220,7 +242,7 @@ export const CURIOSIDADES: Article[] = [
     tags: ['Evangelion', 'Hideaki Anno', 'Simbolismo'],
     author: { name: 'Walking The World Anime' },
     date: '2026-07-03',
-    image: 'https://cdn.myanimelist.net/images/anime/1314/108941l.jpg',
+    image: IMG.eva,
     imageAlt: 'Shinji y el EVA-01 en Neon Genesis Evangelion',
     featured: false, readingTime: 9,
   },
@@ -232,7 +254,7 @@ export const CURIOSIDADES: Article[] = [
     tags: ['Attack on Titan', 'Hajime Isayama', 'Curiosidades'],
     author: { name: 'Walking The World Anime' },
     date: '2026-07-01',
-    image: IMG.banana,
+    image: IMG.aot,
     imageAlt: 'Eren Jaeger y el Titán de Ataque',
     featured: false, readingTime: 6,
   },
@@ -244,7 +266,7 @@ export const CURIOSIDADES: Article[] = [
     tags: ['Death Note', 'Curiosidades', 'Tsugumi Ohba'],
     author: { name: 'Walking The World Anime' },
     date: '2026-06-29',
-    image: 'https://cdn.myanimelist.net/images/anime/9/9453l.jpg',
+    image: IMG.deathnote,
     imageAlt: 'Light Yagami y Ryuk en Death Note',
     featured: false, readingTime: 7,
   },
@@ -256,7 +278,7 @@ export const CURIOSIDADES: Article[] = [
     tags: ['Hunter x Hunter', 'Yoshihiro Togashi', 'Hiatus'],
     author: { name: 'Walking The World Anime' },
     date: '2026-06-27',
-    image: 'https://cdn.myanimelist.net/images/anime/1337/99013l.jpg',
+    image: IMG.hxh,
     imageAlt: 'Gon y Killua en Hunter x Hunter',
     featured: false, readingTime: 6,
   },
