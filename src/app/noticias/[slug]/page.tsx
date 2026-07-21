@@ -8,6 +8,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import { ArticleCard, ArticleCardHorizontal } from '@/components/article/ArticleCard';
 import { Badge, SectionHeading } from '@/components/ui/primitives';
 import { getArticleBySlug, getRelatedArticles, FEATURED_ARTICLES, getAllArticles } from '@/lib/articles';
+import { getAllArticlesWithNews, getArticleBySlugWithNews } from '@/lib/news-service';
 import { CATEGORIES } from '@/content/config/categories';
 import type { Article } from '@/lib/types';
 
@@ -18,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const article = await getArticleBySlugWithNews(slug);
   if (!article) return { title: 'Artículo no encontrado' };
 
   const seo = article.seo;
@@ -53,15 +54,16 @@ export default async function ArticlePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const article = await getArticleBySlugWithNews(slug);
 
   if (!article) notFound();
 
+  const allArticles = await getAllArticlesWithNews();
   const relatedArticles = getRelatedArticles(slug);
-  const popularArticles = getAllArticles().slice(0, 6);
+  const popularArticles = allArticles.slice(0, 6);
   const category = CATEGORIES[article.category];
 
-  const allTags = [...new Set(getAllArticles().flatMap((a) => a.tags))].slice(0, 12);
+  const allTags = [...new Set(allArticles.flatMap((a) => a.tags))].slice(0, 12);
 
   return (
     <div className="min-h-screen flex flex-col">
