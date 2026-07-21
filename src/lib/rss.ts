@@ -83,12 +83,49 @@ function stripHTML(html: string): string {
     .trim();
 }
 
+// Lista de términos obligatorios para filtrar contenido no-anime
+// El título debe contener al menos uno de estos para ser aceptado
+const ANIME_KEYWORDS = [
+  // Español
+  'anime', 'manga', 'otaku', 'seiyuu', 'estreno', 'película',
+  'temporada', 'capítulo', 'episodio', 'doblaje', 'dub', 'sub',
+  'tv', 'netflix', 'crunchyroll', 'disney', 'hulu', 'prime video',
+  'japonés', 'japones', 'japón', 'japon', 'shonen', 'shounen',
+  'seinen', 'shojo', 'shoujo', 'isekai', 'slice of life',
+  'anime/manga', 'cosplay', 'figura', 'merchandising',
+  // Inglés
+  'season', 'episode', 'premiere', 'trailer', 'teaser',
+  'voice actor', 'actress', 'soundtrack', 'ost', 'opening',
+  'ending', 'adaptation', 'sequel', 'prequel', 'remake',
+  'film', 'movie', 'ova', 'ona', 'special',
+  'studio ghibli', 'toei', 'mappa', 'kyoto animation', 'ufotable',
+  'wit studio', 'bones', 'madhouse', 'trigger', 'a-1 pictures',
+  'cloverworks', 'science saru', 'production ig', 'sunrise',
+  'bandai', 'aniplex', 'kodansha', 'shueisha', 'shogakukan',
+  'tokyo', 'akihabara', 'comiket', 'comic market',
+  'anime expo', 'crunchyroll expo', 'comic-con',
+  'gundam', 'pokémon', 'pokemon', 'dragon ball', 'naruto',
+  'one piece', 'demon slayer', 'jujutsu kaisen', 'chainsaw man',
+  'attack on titan', 'shingeki', 'frieren', 'sousou no frieren',
+  'solo leveling', 'oshi no ko', 'spy x family', 'dandadan',
+  'mushoku tensei', 're:zero', 'steins;gate', 'evangelion',
+  'death note', 'hunter x hunter', 'fullmetal alchemist',
+  'bleach', 'one punch man', 'mob psycho', 'my hero academia',
+  'boku no hero', 'kimetsu', 'kaguya-sama', 'love is war',
+];
+
+function isAnimeRelated(title: string): boolean {
+  const lower = title.toLowerCase();
+  return ANIME_KEYWORDS.some((kw) => lower.includes(kw));
+}
+
 // Convert RSS item to our Article format
+// Returns null if the item is not anime-related
 function rssItemToArticle(
   item: RSSItem,
   sourceId: string,
   index: number
-): Article {
+): Article | null {
   const source = NEWS_SOURCES.find((s) => s.id === sourceId);
   const slug = item.title
     .toLowerCase()
@@ -97,6 +134,11 @@ function rssItemToArticle(
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')
     .substring(0, 80);
+
+  // Filtrar solo contenido relacionado a anime
+  if (!isAnimeRelated(item.title)) {
+    return null;
+  }
 
   const image =
     item['media:content']?.url ||
@@ -162,7 +204,9 @@ export async function fetchRSSFeed(sourceId: string): Promise<Article[]> {
     const xml = await response.text();
     const items = parseRSSXML(xml);
 
-    return items.map((item, i) => rssItemToArticle(item, sourceId, i));
+    return items
+      .map((item, i) => rssItemToArticle(item, sourceId, i))
+      .filter((a): a is Article => a !== null);
   } catch (error) {
     console.warn(`Error fetching ${source.name}:`, error);
     return [];
