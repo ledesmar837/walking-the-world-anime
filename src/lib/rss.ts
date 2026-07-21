@@ -96,7 +96,7 @@ function rssItemToArticle(
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')
-    .substring(0, 80) + '-' + Date.now().toString(36);
+    .substring(0, 80);
 
   const image =
     item['media:content']?.url ||
