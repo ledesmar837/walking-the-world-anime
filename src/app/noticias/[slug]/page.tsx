@@ -12,6 +12,8 @@ import { getAllArticlesWithNews, getArticleBySlugWithNews } from '@/lib/news-ser
 import { CATEGORIES } from '@/content/config/categories';
 import type { Article } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 // Generate metadata
 export async function generateMetadata({
   params,
