@@ -208,7 +208,6 @@ export const LATEST_ARTICLES: Article[] = [
   },
 ];
 
-// 💡 CURIOSIDADES
 export const CURIOSIDADES: Article[] = [
   {
     slug: 'curiosidades-dragon-ball',

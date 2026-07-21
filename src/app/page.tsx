@@ -6,14 +6,14 @@ import HeroCarousel from '@/components/home/HeroCarousel';
 import ShopHeroBanner from '@/components/shop/ShopHeroBanner';
 import { ArticleCard } from '@/components/article/ArticleCard';
 import { SectionHeading } from '@/components/ui/primitives';
-import { FEATURED_ARTICLES } from '@/lib/articles';
+import { FEATURED_ARTICLES, getArticlesByCategory } from '@/lib/articles';
 import { getAllArticlesWithNews } from '@/lib/news-service';
 
 export const revalidate = 1800; // ISR: revalidar cada 30 min
 
 export default async function HomePage() {
   const allArticles = await getAllArticlesWithNews();
-  const latestArticles = allArticles.filter((a) => !FEATURED_ARTICLES.find((f) => f.slug === a.slug)).slice(0, 9);
+  const latestArticles = allArticles.filter((a) => !FEATURED_ARTICLES.find((f) => f.slug === a.slug)).slice(0, 12);
 
   // Populate sidebar data
   const popularArticles = allArticles.slice(0, 6);
@@ -46,7 +46,7 @@ export default async function HomePage() {
                 href="/noticias"
               />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
-                {latestArticles.slice(0, 6).map((article, i) => (
+                {latestArticles.map((article, i) => (
                   <div
                     key={article.slug}
                     className="animate-fade-in-up"
@@ -129,7 +129,7 @@ export default async function HomePage() {
                 ))}
               </div>
 
-              {/* Curiosidades */}
+              {/* Curiosidades — contenido real del array CURIOSIDADES */}
               <SectionHeading
                 title="Curiosidades"
                 subtitle="Descubre el lado oculto del anime"
@@ -137,7 +137,7 @@ export default async function HomePage() {
                 href="/curiosidades"
               />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {latestArticles.slice(6, 9).map((article) => (
+                {getArticlesByCategory('curiosidades').slice(0, 4).map((article) => (
                   <div key={article.slug} className="animate-fade-in-up">
                     <ArticleCard article={article} />
                   </div>
